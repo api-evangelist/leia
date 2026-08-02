@@ -1,0 +1,69 @@
+generated: '2026-08-01'
+method: searched
+source: https://immersity.ai/pricing, https://docs-api.immersity.ai/docs/getting-started
+currency: USD
+model: prepaid credits, consumed by both the web app and the Immersity Cloud API
+api_metering:
+  free_grant: 100 credits on a new account
+  free_grant_restriction: free credits cannot be used for commercial purposes
+  documented_api_rate: 10 credits per API call (flat rate, per the API getting-started guide)
+  price_endpoint: GET /api/v1/prices (ProductPricingController_getPrices)
+  top_up: profile menu > Buy Credits in the Immersity account
+plans:
+- name: Free
+  price: 0
+  interval: month
+  credits: unlimited watermarked conversions
+  limits:
+    resolution: up to 720p
+    watermark: true
+    commercial_use: false
+- name: Image
+  price: 4.99
+  interval: month
+  credits: 500 conversions per month
+  limits:
+    resolution: up to 4K
+    watermark: false
+    commercial_use: true
+- name: Image Pro
+  price: 14.99
+  interval: month
+  credits: 1700 conversions per month
+  limits:
+    resolution: up to 4K
+    watermark: false
+    commercial_use: true
+- name: Video
+  price: 24.99
+  interval: month
+  credits: 3300 conversions per month
+  limits:
+    resolution: up to 4K
+    watermark: false
+    commercial_use: true
+- name: Video Pro
+  price: 49.99
+  interval: month
+  credits: 7500 conversions per month
+  limits:
+    resolution: up to 4K
+    watermark: false
+    commercial_use: true
+- name: Video Max
+  price: 99.99
+  interval: month
+  credits: 20000 conversions per month
+  limits:
+    resolution: up to 4K
+    watermark: false
+    commercial_use: true
+plan_count: 6
+notes:
+- Per-conversion credit cost varies with resolution and output format; spatial video is priced per minute.
+- No enterprise or annual tier is listed on the public pricing page.
+- Device/runtime SDK licensing is handled through OEM partnership, not this price list.
+x-evidence:
+  fetched: '2026-08-01'
+  url: https://immersity.ai/pricing
+  http_status: 200

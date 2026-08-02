@@ -1,0 +1,136 @@
+generated: '2026-08-01'
+method: derived
+source: openapi/leia-immersity-cloud-api-openapi.yml
+note: >-
+  The Immersity Cloud API is a stateless transformation surface: it exposes no persisted, addressable
+  resources (no ids, no GET-by-id, no collections). The "entities" below are the media artifacts that flow
+  between operations, and the relationships are the pipeline dependencies the specs encode — an operation's
+  required input URL must be the output of an earlier operation. Cardinalities are read from required
+  fields, not from a stored data model.
+entities:
+- name: Image2D
+  kind: input artifact
+  description: A standard flat 2D image referenced by URL. Also accepts a 360 image via inputType=image360.
+  carried_by:
+  - RESTMonoDepthEstimationParams.inputImageUrl
+  - RESTAnimationGenerationParams.inputImageUrl
+  - RESTStereoSbsGenerationParams.inputImageUrl
+  - RESTStereoTopBottomGenerationParams.inputImageUrl
+  - RESTLifDecoderParams.inputImageUrl
+  - RESTLifEncoderParams.inputSingleImageUrl
+- name: DisparityMap
+  kind: derived artifact
+  description: Per-pixel depth/disparity estimate produced from a single 2D image. Output bit depth uint8 or uint16.
+  produced_by: TransactionController_estimateMonoDepth
+  consumed_by:
+  - TransactionController_generateAnimation
+  - TransactionController_generateStereoSbs
+  - TransactionController_generateStereoTopBottom
+  - TransactionController_encodeLif
+- name: Animation
+  kind: derived artifact
+  description: 3D parallax animation rendered from an image plus its disparity map. Output mp4 or gif, with
+    circular or explicit frame-by-frame pattern control.
+  produced_by: TransactionController_generateAnimation
+- name: StereoPair
+  kind: derived artifact
+  description: Stereoscopic render of an image, laid out side-by-side, top-bottom, anaglyph or spatial.
+  produced_by:
+  - TransactionController_generateStereoSbs
+  - TransactionController_generateStereoTopBottom
+- name: LIF
+  kind: container artifact
+  description: Leia Image Format file bundling image(s) and disparity map(s); encodable from single or
+    left/right image pairs and decodable back to a 2D image.
+  produced_by: TransactionController_encodeLif
+  consumed_by: TransactionController_decodeLif
+- name: Video
+  kind: input artifact
+  description: Source 2D (or sbs/tb) video referenced by URL, priced by length in seconds.
+  carried_by:
+  - RESTVideoConversionParams.inputVideoUrl
+  - RESTSpatialVideoConversionParams.inputVideoUrl
+- name: ImmersiveVideo
+  kind: derived artifact
+  description: Converted video output — sbs, tb, depth, depth_exr, anaglyph or Apple Vision spatial.
+  produced_by:
+  - TransactionController_generateVideoConversion
+  - TransactionController_generateSpatialVideoConversion
+- name: PresignedUrl
+  kind: capability token
+  description: Writable cloud-storage URL every operation writes its result to. Leia Storage can mint one
+    with a 24-hour expiry.
+  produced_by: StorageController_getStoragePresignedUrl
+  schema: RESTStorageApiCallResult {url, urlExpiresUTC}
+- name: Transaction
+  kind: ephemeral job
+  description: One metered API call, identified by correlationId and echoed back in RESTAPICallResult. Video
+    jobs additionally notify callbackUrl on completion.
+  schema: RESTAPICallResult {correlationId, resultPresignedUrl}
+- name: Prices
+  kind: reference data
+  description: Current credit prices per product (disparity.mono, animation.gif, animation.mp4).
+  produced_by: ProductPricingController_getPrices
+relationships:
+- from: DisparityMap
+  to: Image2D
+  type: belongs_to
+  via: inputImageUrl
+  required: true
+- from: Animation
+  to: DisparityMap
+  type: belongs_to
+  via: inputDisparityUrl
+  required: true
+- from: Animation
+  to: Image2D
+  type: belongs_to
+  via: inputImageUrl
+  required: true
+- from: StereoPair
+  to: Image2D
+  type: belongs_to
+  via: inputImageUrl
+  required: true
+- from: StereoPair
+  to: DisparityMap
+  type: belongs_to
+  via: inputDisparityUrl
+  required: true for topBottom, optional for sbs
+- from: LIF
+  to: Image2D
+  type: has_many
+  via: inputSingleImageUrl / inputLeftImageUrl / inputRightImageUrl
+- from: LIF
+  to: DisparityMap
+  type: has_many
+  via: inputSingleDisparityUrl / inputLeftDisparityUrl / inputRightDisparityUrl
+- from: ImmersiveVideo
+  to: Video
+  type: belongs_to
+  via: inputVideoUrl
+  required: true
+- from: Transaction
+  to: PresignedUrl
+  type: has_one
+  via: resultPresignedUrl
+- from: Transaction
+  to: Transaction
+  type: has_one
+  via: correlationId
+  note: correlates the request, the written artifact and the callback notification
+identifiers:
+- field: correlationId
+  format: UUID
+  scope: per request
+  persisted: not documented
+pipeline:
+- step: 1
+  operation: StorageController_getStoragePresignedUrl
+  note: optional — mint a writable Leia Storage URL (or bring your own S3/GCS/Azure presigned URL)
+- step: 2
+  operation: TransactionController_estimateMonoDepth
+  produces: DisparityMap
+- step: 3
+  operation: TransactionController_generateAnimation | generateStereoSbs | generateStereoTopBottom | encodeLif
+  consumes: DisparityMap

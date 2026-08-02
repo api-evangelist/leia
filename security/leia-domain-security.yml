@@ -1,0 +1,29 @@
+generated: '2026-08-01'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: immersity.ai
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Oct 15 08:19:16 2026 GMT
+  hsts: true
+  hsts_max_age: 31536000
+- host: docs-api.immersity.ai
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Sep 26 07:01:51 2026 GMT
+  hsts: true
+  hsts_max_age: 31536000
+- host: api.immersity.ai
+  https: true
+  tls_version: TLSv1.2
+  cert_expires: Feb  2 23:59:59 2027 GMT
+  hsts: true
+  hsts_max_age: 31536000
+domains:
+- domain: immersity.ai
+  dnssec: false
+  caa: []
+  spf: true
+  dmarc: true
+  dmarc_policy: quarantine

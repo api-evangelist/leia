@@ -1,0 +1,69 @@
+generated: '2026-08-01'
+method: derived
+source: openapi/leia-immersity-cloud-api-openapi.yml, well-known/leia-openid-configuration.json,
+  https://docs-api.immersity.ai/docs/getting-started
+standards:
+- id: openapi-3.0
+  conforms: true
+  evidence: 'both published documents declare `openapi: 3.0.0` with paths, components and servers'
+- id: oauth2
+  conforms: true
+  evidence: RFC 6749 client-credentials grant documented and served by the Immersity Keycloak realm token endpoint
+- id: oauth2-client-credentials
+  conforms: true
+  evidence: client_credentials listed in grant_types_supported of the live OIDC discovery document
+- id: oidc-discovery
+  conforms: true
+  evidence: https://auth.immersity.ai/auth/realms/immersity/.well-known/openid-configuration returns 200 JSON
+- id: rfc8414-oauth-authorization-server-metadata
+  conforms: true
+  evidence: /.well-known/oauth-authorization-server on the realm returns 200 JSON (identical to the OIDC document)
+- id: rfc7636-pkce
+  conforms: true
+  evidence: code_challenge_methods_supported includes S256 and plain
+- id: rfc9126-pushed-authorization-requests
+  conforms: true
+  evidence: pushed_authorization_request_endpoint present in discovery
+- id: rfc8628-device-authorization-grant
+  conforms: true
+  evidence: urn:ietf:params:oauth:grant-type:device_code in grant_types_supported
+- id: rfc8693-token-exchange
+  conforms: true
+  evidence: urn:ietf:params:oauth:grant-type:token-exchange in grant_types_supported
+- id: jwt-bearer-tokens
+  conforms: true
+  evidence: securityScheme `bearer` with bearerFormat JWT applied to every Cloud API operation
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: no 4xx response declares a schema or application/problem+json media type
+- id: rfc9116-security-txt
+  conforms: false
+  evidence: /.well-known/security.txt returns 404 on every Leia/Immersity host probed
+- id: rfc8594-sunset-header
+  conforms: false
+  evidence: no deprecation or sunset policy published
+- id: rfc9110-idempotency
+  conforms: false
+  evidence: no idempotency key documented; correlationId is a per-request correlation identifier
+- id: asyncapi
+  conforms: false
+  evidence: no AsyncAPI document published; the event surface is an HTTP callbackUrl on video operations
+- id: a2a-agent-card
+  conforms: false
+  evidence: /.well-known/agent-card.json and /.well-known/agent.json 404 on every host probed
+- id: mcp
+  conforms: false
+  evidence: no hosted MCP server found in docs, the LeiaInc GitHub org, npm or MCP registries
+- id: llms-txt
+  conforms: true
+  evidence: https://docs-api.immersity.ai/llms.txt and https://immersity.ai/llms.txt both return 200 text/plain
+- id: gdpr
+  conforms: unknown
+  evidence: a privacy policy is published at https://immersity.ai/privacy-policy but no certification or
+    compliance program page was found
+compliance_program:
+  published: false
+  note: >-
+    No trust center, SOC 2 / ISO 27001 / PCI / HIPAA / FedRAMP claim, and no security or compliance page was
+    found on immersity.ai, leiainc.com, trust.immersity.ai or security.immersity.ai. No `Compliance` pointer
+    is emitted.

@@ -1,0 +1,71 @@
+generated: '2026-08-01'
+method: searched
+source: live probes of every Leia / Immersity host in apis.yml and the OpenAPI servers[]
+hosts_probed:
+- https://immersity.ai
+- https://api.immersity.ai
+- https://auth.immersity.ai
+- https://docs-api.immersity.ai
+- https://app.immersity.ai
+- https://leiainc.com
+note: >-
+  api.immersity.ai and app.immersity.ai answer HTTP 200 with an HTML body for every /.well-known/* path
+  (single-page-app / documentation catch-all), so those 200s are rejected as false positives rather than
+  recorded as documents. The only real discovery surface is the Immersity Keycloak realm, which serves both
+  RFC 8414 and OIDC discovery from the realm path rather than the host root.
+host: https://auth.immersity.ai/auth/realms/immersity
+documents:
+- path: /auth/realms/immersity/.well-known/openid-configuration
+  host: auth.immersity.ai
+  status: 200
+  content_type: application/json;charset=UTF-8
+  standard: OpenID Connect Discovery 1.0
+  file: leia-openid-configuration.json
+- path: /auth/realms/immersity/.well-known/oauth-authorization-server
+  host: auth.immersity.ai
+  status: 200
+  content_type: application/json;charset=UTF-8
+  standard: RFC 8414 OAuth 2.0 Authorization Server Metadata
+  file: leia-oauth-authorization-server.json
+  note: byte-identical to the openid-configuration document
+- path: /.well-known/security.txt
+  host: immersity.ai
+  status: 404
+- path: /.well-known/security.txt
+  host: auth.immersity.ai
+  status: 404
+- path: /.well-known/security.txt
+  host: docs-api.immersity.ai
+  status: 404
+- path: /.well-known/api-catalog
+  host: immersity.ai
+  status: 404
+- path: /.well-known/ai-plugin.json
+  host: immersity.ai
+  status: 404
+- path: /.well-known/agent-card.json
+  host: immersity.ai
+  status: 404
+- path: /.well-known/agent.json
+  host: immersity.ai
+  status: 404
+- path: /.well-known/agent-card.json
+  host: auth.immersity.ai
+  status: 404
+- path: /.well-known/agent.json
+  host: auth.immersity.ai
+  status: 404
+- path: /.well-known/agent-card.json
+  host: docs-api.immersity.ai
+  status: 404
+- path: /.well-known/agent.json
+  host: docs-api.immersity.ai
+  status: 404
+- path: /.well-known/oauth-authorization-server
+  host: immersity.ai
+  status: 404
+- path: /.well-known/openid-configuration
+  host: immersity.ai
+  status: 404
+x-evidence:
+  fetched: '2026-08-01'

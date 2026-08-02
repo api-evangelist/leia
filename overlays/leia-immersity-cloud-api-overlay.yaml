@@ -1,0 +1,64 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for the Immersity Cloud API
+  version: 1.0.0
+extends: openapi/leia-immersity-cloud-api-openapi.yml
+x-generated: '2026-08-01'
+x-method: generated
+x-source: openapi/leia-immersity-cloud-api-openapi.yml
+actions:
+- target: $.info
+  description: Record the API Evangelist provenance of the harvested document.
+  update:
+    x-apievangelist-provider: leia
+    x-apievangelist-harvested: '2026-08-01'
+    x-apievangelist-source: https://docs-api.immersity.ai/reference/transactioncontroller_estimatemonodepth-1
+    x-apievangelist-artifacts:
+      authentication: authentication/leia-authentication.yml
+      scopes: scopes/leia-scopes.yml
+      conventions: conventions/leia-conventions.yml
+      errors: errors/leia-problem-types.yml
+      data-model: data-model/leia-data-model.yml
+      callbacks: asyncapi/leia-callbacks.yml
+      lifecycle: lifecycle/leia-lifecycle.yml
+- target: $
+  description: Apply the bearer scheme document-wide — it is declared and applied per operation but no
+    document-level security requirement is set.
+  update:
+    security:
+    - bearer: []
+- target: $.tags
+  description: Declare the Product Pricing tag, which is used by an operation but missing from the tags list.
+  update:
+  - name: Product Pricing
+    description: Read current credit prices for Immersity products.
+- target: $.info
+  description: Point at the OAuth 2.0 discovery document that actually governs authentication.
+  update:
+    x-authentication-discovery: https://auth.immersity.ai/auth/realms/immersity/.well-known/openid-configuration
+    x-token-endpoint: https://auth.immersity.ai/auth/realms/immersity/protocol/openid-connect/token
+    x-grant-type: client_credentials
+- target: $.paths['/api/v1/video'].post
+  description: Note the callback contract on the long-running video conversion.
+  update:
+    x-callback: asyncapi/leia-callbacks.yml#video-conversion-completed
+    x-async: true
+- target: $.paths['/api/v1/spatial'].post
+  description: Note the callback contract on the long-running spatial conversion.
+  update:
+    x-callback: asyncapi/leia-callbacks.yml#spatial-video-conversion-completed
+    x-async: true
+- target: $.paths['/api/v1/transaction/callback'].post
+  description: Flag the callback receiver, whose request schema is published with no properties.
+  update:
+    summary: Transaction callback receiver
+    x-schema-incomplete: TransactionCallbackParams is published as an empty object
+- target: $.info
+  description: Record the metering contract that governs every call.
+  update:
+    x-metering:
+      unit: credit
+      documented_flat_rate: 10 credits per API call
+      free_grant: 100 credits, non-commercial use only
+      insufficient_funds_status: 402
+      price_operation: ProductPricingController_getPrices

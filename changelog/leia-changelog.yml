@@ -1,0 +1,42 @@
+generated: '2026-08-01'
+method: searched
+source: https://docs-api.immersity.ai/changelog, https://docs-api.immersity.ai/docs/release-notes
+scheme: document-version
+current_version: 3.1.1
+current_version_source: openapi/leia-immersity-cloud-api-openapi.yml (info.version)
+docs_branch: '2.0'
+surfaces:
+  developer_hub_changelog: https://docs-api.immersity.ai/changelog
+  api_release_notes: account-gated — "Release notes are available on your account. Click your picture
+    profile and click 'Latest Release Note'."
+  product_updates: https://immersity.ai/newsroom
+completeness: >-
+  The public developer-hub changelog carries a single entry. Substantive API release notes are behind
+  account authentication and were not harvested. Public product-update posts on the newsroom are listed
+  below as the visible dated record; they are product announcements, not API change entries.
+entries:
+- title: Welcome to Immersity AI
+  date: '2024-05-13'
+  url: https://docs-api.immersity.ai/changelog/welcome-to-leiapix
+  breaking: false
+  summary: Launch of the Immersity AI developer hub and documentation (the rebrand of the LeiaPix Developer Hub).
+product_updates:
+- title: Immersity 4.0
+  url: https://immersity.ai/news-articles/immersity-4-0
+- title: v3.1 export flow updated
+  url: https://immersity.ai/news-articles/v3-1-export-flow-updated
+- title: Immersity AI platform adds new 2D-to-3D video conversion tool
+  url: https://immersity.ai/news-articles/immersity-ai-platform-adds-new-2d-to-3d-video-conversion-tool
+  note: corresponds to the /api/v1/video and /api/v1/spatial operations in the current contract
+- title: From Leia Inc to Immersity — our journey of immersive innovation
+  url: https://immersity.ai/news-articles/from-leia-inc-to-immersity-our-journey-of-immersive-innovation
+  note: the LeiaPix to Immersity rename; api.leiapix.com remains an alternate server in the OpenAPI
+- title: LeiaPix Converter version 1.2 updates
+  url: https://immersity.ai/news-articles/leiapix-converter-version-1-2-updates
+x-evidence:
+  fetched: '2026-08-01'
+  urls:
+  - https://docs-api.immersity.ai/changelog
+  - https://docs-api.immersity.ai/docs/release-notes.md
+  - https://immersity.ai/sitemap.xml
+  http_status: 200

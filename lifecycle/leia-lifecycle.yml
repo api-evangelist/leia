@@ -1,0 +1,54 @@
+generated: '2026-08-01'
+method: searched
+source: openapi/leia-immersity-cloud-api-openapi.yml, https://docs-api.immersity.ai/docs/release-notes
+versioning:
+  scheme: uri-path
+  current: v1
+  path_prefix: /api/v1
+  document_version: 3.1.1
+  document_title: Immersity Cloud API
+  docs: https://docs-api.immersity.ai/docs/getting-started
+  note: >-
+    The API path has stayed at /api/v1 while the published OpenAPI document version has advanced to 3.1.1;
+    the document version is the de facto contract version. The docs branch is labelled 2.0.
+deprecation:
+  policy_url: null
+  policy_published: false
+  sunset_header: unknown
+  note: >-
+    No deprecation or sunset policy is published, and no RFC 8594 Sunset/Deprecation header support is
+    documented. The legacy api.leiapix.com host is still declared as a second server in the OpenAPI
+    alongside api.immersity.ai following the LeiaPix to Immersity rename, but no retirement date is stated
+    for it.
+legacy_hosts:
+- host: https://api.leiapix.com
+  status: still declared in servers[]
+  successor: https://api.immersity.ai
+sla:
+  url: null
+  uptime_target: null
+  published: false
+status_page: null
+status_page_note: >-
+  Probed https://status.immersity.ai (no DNS), https://immersity.ai/status and the docs host — no public
+  status page was found.
+release_notes:
+  public_changelog: https://docs-api.immersity.ai/changelog
+  gated_release_notes: >-
+    "Release notes are available on your account. Click your picture profile and click 'Latest Release
+    Note'." — the substantive API release notes are behind account authentication.
+  public_product_updates: https://immersity.ai/newsroom
+  detail: changelog/leia-changelog.yml
+deprecated_operations: []
+deprecated_operations_note: 'no operation in the published OpenAPI carries `deprecated: true`'
+rename_history:
+- from: LeiaPix
+  to: Immersity AI
+  evidence: https://immersity.ai/news-articles/from-leia-inc-to-immersity-our-journey-of-immersive-innovation
+  api_impact: api.leiapix.com retained as an alternate server; docs moved to docs-api.immersity.ai
+x-evidence:
+  fetched: '2026-08-01'
+  urls:
+  - https://docs-api.immersity.ai/docs/release-notes
+  - https://docs-api.immersity.ai/changelog
+  http_status: 200

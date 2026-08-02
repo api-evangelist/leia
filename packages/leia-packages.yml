@@ -1,0 +1,89 @@
+generated: '2026-08-01'
+method: searched
+source: https://immersity.ai/developers, https://github.com/LeiaInc, npm/PyPI registry search
+registry_search:
+  npm: 'searched "immersity", "leiapix", "leia lightfield" — no first-party package published'
+  pypi: 'probed immersity, immersity-ai, leiapix, leia-sdk — 404'
+  maven_central: no public first-party coordinate found
+  nuget: none found
+  rubygems: none found
+  crates_io: none found
+  packagist: none found
+  pkg_go_dev: none found
+summary: >-
+  Leia ships no client library for the Immersity Cloud API on any public package registry — the documented
+  integration path is plain HTTP with the published sample code. The SDKs Leia does ship are device/runtime
+  SDKs for immersive displays (Windows, Android, Unity, Unreal), distributed through an authenticated
+  developer portal at support.immersity.ai/sdk (Keycloak-gated) and the Unity Asset Store, not through npm
+  or PyPI.
+packages:
+- name: Immersity Windows SDK
+  language: c++
+  registry: vendor-portal
+  url: https://immersity.ai/developers
+  distribution: https://support.immersity.ai/sdk
+  access: gated — requires an Immersity developer profile (Keycloak sign-in) and Terms & Conditions acceptance
+  description: SDK for building on immersive Windows displays such as the Acer SpatialLabs and Samsung
+    Odyssey 3D.
+  official: true
+- name: Immersity Android SDK
+  language: java
+  registry: vendor-portal
+  url: https://immersity.ai/developers
+  distribution: https://support.immersity.ai/sdk
+  access: gated — requires an Immersity developer profile
+  description: SDK for building on immersive Android tablets including the Nubia Pad II and Red Magic 3D Explorer.
+  official: true
+- name: Immersity Unity plug-in
+  language: c#
+  registry: vendor-portal
+  url: https://immersity.ai/developers
+  description: Unity plug-in for the Immersity Runtime. Leia is a Unity Verified Solutions Partner.
+  evidence: https://immersity.ai/news-articles/unity-verified-solutions-partner-vsp
+  official: true
+- name: Immersity Unreal Engine plug-in
+  language: c++
+  registry: vendor-portal
+  url: https://immersity.ai/developers
+  description: Unreal Engine plug-in for the Immersity Runtime.
+  official: true
+sample_code:
+- name: leiapix-cloud-api-example
+  languages:
+  - python
+  - javascript
+  url: https://github.com/LeiaInc/leiapix-cloud-api-example
+  description: First-party Python and Node.js samples of the Immersity (LeiaPix) Cloud API integration flow —
+    token exchange, presigned URL, disparity, animation.
+  official: true
+  packaged: false
+- name: Leia_WebGL_SDK
+  language: javascript
+  url: https://github.com/LeiaInc/Leia_WebGL_SDK
+  description: WebGL/three.js rendering SDK for Leia lightfield displays, published source-only on the LeiaInc
+    GitHub org.
+  official: true
+  packaged: false
+- name: MediaSdkSamples
+  language: kotlin
+  url: https://github.com/LeiaInc/MediaSdkSamples
+  description: Samples demonstrating the Leia Android Media SDK.
+  official: true
+  packaged: false
+- name: CNSDK getting-started samples
+  language: c
+  url: https://github.com/LeiaInc
+  description: CNSDK quick-start repos for OpenGL, D3D11, D3D12 and Android (CNSDKGettingStartedGL,
+    CNSDKGettingStartedD3D11, CNSDKGettingStartedD3D12, CNSDKGettingStartedGLAndroid).
+  official: true
+  packaged: false
+notes:
+- The Immersity Runtime itself "can only be installed through authorized OEM partners" per the developers page.
+- No official CLI was found; no cli/ artifact is emitted.
+x-evidence:
+  fetched: '2026-08-01'
+  urls:
+  - https://immersity.ai/developers
+  - https://api.github.com/orgs/LeiaInc/repos
+  - https://registry.npmjs.org/-/v1/search?text=immersity
+  http_status: 200

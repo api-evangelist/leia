@@ -1,0 +1,88 @@
+generated: '2026-08-01'
+method: probed
+source: https://auth.immersity.ai/auth/realms/immersity/.well-known/openid-configuration
+docs: https://docs-api.immersity.ai/docs/getting-started
+note: >-
+  The published Immersity OpenAPI documents declare a plain bearer scheme and carry no oauth2 flow object,
+  so no scopes could be derived from the specs. These scopes were read from the live OIDC discovery document
+  of the Immersity Keycloak realm (scopes_supported), which is served anonymously. Descriptions are our own
+  reading of each scope name against the platform's documented services; Immersity does not publish a scope
+  reference page. Which scopes a given client-credentials client is actually granted is set per client in
+  the Immersity account console.
+schemes:
+- name: immersity-keycloak
+  issuer: https://auth.immersity.ai/auth/realms/immersity
+  source: well-known/leia-openid-configuration.json
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://auth.immersity.ai/auth/realms/immersity/protocol/openid-connect/token
+  - flow: authorizationCode
+    authorizationUrl: https://auth.immersity.ai/auth/realms/immersity/protocol/openid-connect/auth
+    tokenUrl: https://auth.immersity.ai/auth/realms/immersity/protocol/openid-connect/token
+scopes:
+- scope: openid
+  description: OpenID Connect authentication; returns an ID token.
+  kind: standard
+- scope: profile
+  description: Basic profile claims for the authenticated subject.
+  kind: standard
+- scope: email
+  description: Email address claim for the authenticated subject.
+  kind: standard
+- scope: address
+  description: Address claims for the authenticated subject.
+  kind: standard
+- scope: phone
+  description: Phone number claims for the authenticated subject.
+  kind: standard
+- scope: roles
+  description: Realm and client role claims.
+  kind: standard
+- scope: offline_access
+  description: Issue a refresh token usable while the user is offline.
+  kind: standard
+- scope: web-origins
+  description: CORS allowed-origins claim (Keycloak built-in).
+  kind: standard
+- scope: acr
+  description: Authentication context class reference (Keycloak built-in).
+  kind: standard
+- scope: basic
+  description: Baseline token claims (Keycloak built-in).
+  kind: standard
+- scope: microprofile-jwt
+  description: MicroProfile JWT claim mapping (Keycloak built-in).
+  kind: standard
+- scope: service_account
+  description: Marks a machine-to-machine client-credentials service account token.
+  kind: platform
+- scope: leia-api-gateway
+  description: Access to the Leia/Immersity API gateway fronting the Immersity Cloud API.
+  kind: platform
+- scope: leia-storage-service
+  description: Access to Leia Storage, the presigned-URL upload/download service.
+  kind: platform
+- scope: product-price-service
+  description: Access to the product pricing service backing GET /api/v1/prices.
+  kind: platform
+- scope: payment-entitlement-service
+  description: Access to the credit/entitlement service that meters API consumption.
+  kind: platform
+- scope: immersity-sdk-developer
+  description: Developer entitlement for the gated Immersity SDK portal (support.immersity.ai/sdk).
+  kind: platform
+- scope: immersity-ai-mobile-backend
+  description: Backend access used by the Immersity AI mobile applications.
+  kind: platform
+- scope: device-management
+  description: Device registration and management for Immersity-enabled hardware.
+  kind: platform
+- scope: user-created-timestamp
+  description: Exposes the account creation timestamp as a token claim.
+  kind: platform
+x-evidence:
+  fetched: '2026-08-01'
+  url: https://auth.immersity.ai/auth/realms/immersity/.well-known/openid-configuration
+  http_status: 200
+  content_type: application/json
+  scope_count: 20

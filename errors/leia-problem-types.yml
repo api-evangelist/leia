@@ -1,0 +1,73 @@
+generated: '2026-08-01'
+method: derived
+source: openapi/leia-immersity-cloud-api-openapi.yml, openapi/leia-immersity-authentication-openapi.yml
+docs: https://docs-api.immersity.ai/docs/getting-started
+format: undocumented
+format_note: >-
+  Immersity does not publish an error reference page and the OpenAPI 4xx responses carry a description but
+  no schema and no media type, so the error body shape is unspecified. Not RFC 9457 application/problem+json.
+  Callers should branch on the HTTP status code. The only named error string published anywhere in the
+  contract is ERROR_VIDEO_LENGTH_MISMATCH, returned on the video-conversion callback payload.
+problems:
+- status: 400
+  title: The request has invalid parameters
+  applies_to: all Immersity Cloud API operations
+  remediation: >-
+    Validate the request body against the operation schema — required fields (inputImageUrl,
+    inputDisparityUrl, inputVideoUrl, resultPresignedUrl, videoLength, creditAmount, callbackUrl depending
+    on the operation) and the numeric bounds on gain (-10..10), convergence (-1..1), dilateRatio (0..20),
+    outputWidth/outputHeight (max 8000).
+  source_operations:
+  - openapi/leia-immersity-cloud-api-openapi.yml#TransactionController_estimateMonoDepth
+  - openapi/leia-immersity-cloud-api-openapi.yml#TransactionController_generateAnimation
+  - openapi/leia-immersity-cloud-api-openapi.yml#TransactionController_generateStereoSbs
+  - openapi/leia-immersity-cloud-api-openapi.yml#TransactionController_generateStereoTopBottom
+  - openapi/leia-immersity-cloud-api-openapi.yml#TransactionController_decodeLif
+  - openapi/leia-immersity-cloud-api-openapi.yml#TransactionController_encodeLif
+  - openapi/leia-immersity-cloud-api-openapi.yml#TransactionController_generateVideoConversion
+  - openapi/leia-immersity-cloud-api-openapi.yml#TransactionController_generateSpatialVideoConversion
+  - openapi/leia-immersity-cloud-api-openapi.yml#StorageController_getStoragePresignedUrl
+- status: 401
+  title: Returned if the user is not authenticated or authentication parameters are invalid
+  applies_to: every operation, including GET /api/v1/prices
+  remediation: >-
+    Re-mint an access token at the Keycloak realm token endpoint with grant_type=client_credentials and send
+    it as `Authorization: Bearer <access_token>`. Confirm the client ID / secret pair is still active on the
+    Immersity account page.
+  source_operations:
+  - openapi/leia-immersity-cloud-api-openapi.yml#ProductPricingController_getPrices
+  - openapi/leia-immersity-cloud-api-openapi.yml#TransactionController_estimateMonoDepth
+  - openapi/leia-immersity-cloud-api-openapi.yml#TransactionController_generateVideoConversion
+- status: 402
+  title: Returned if there is not enough credit balance
+  applies_to: credit-consuming image operations and the storage presigned-URL operation
+  remediation: >-
+    Top up credits from the Immersity account (profile menu > Buy Credits). Call GET /api/v1/prices first to
+    price the operation. Free promotional credits cannot be used commercially.
+  source_operations:
+  - openapi/leia-immersity-cloud-api-openapi.yml#TransactionController_estimateMonoDepth
+  - openapi/leia-immersity-cloud-api-openapi.yml#TransactionController_generateAnimation
+  - openapi/leia-immersity-cloud-api-openapi.yml#TransactionController_generateStereoSbs
+  - openapi/leia-immersity-cloud-api-openapi.yml#TransactionController_generateStereoTopBottom
+  - openapi/leia-immersity-cloud-api-openapi.yml#TransactionController_decodeLif
+  - openapi/leia-immersity-cloud-api-openapi.yml#TransactionController_encodeLif
+  - openapi/leia-immersity-cloud-api-openapi.yml#StorageController_getStoragePresignedUrl
+- status: 400
+  title: Bad Request
+  applies_to: POST /protocol/openid-connect/token
+  remediation: Check client_id, client_secret and grant_type=client_credentials form fields.
+  source_operations:
+  - openapi/leia-immersity-authentication-openapi.yml#get-access-token-1
+callback_errors:
+- code: ERROR_VIDEO_LENGTH_MISMATCH
+  delivered_on: the caller's callbackUrl payload
+  meaning: >-
+    The `videoLength` sent with the video-conversion request did not match the actual length of the file at
+    `inputVideoUrl` after server-side verification, so the request was rejected.
+  remediation: Measure the source video and resend with the true length and a matching pre-calculated creditAmount.
+  source: openapi/leia-immersity-cloud-api-openapi.yml#RESTVideoConversionParams.videoLength
+gaps:
+- No 429 / rate-limit response is declared on any operation.
+- No 5xx responses are declared on any operation.
+- No error response carries a schema or media type, so error bodies cannot be parsed against a contract.
+- POST /api/v1/transaction/callback declares only a 201 and an empty TransactionCallbackParams schema.

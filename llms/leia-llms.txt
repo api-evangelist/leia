@@ -1,0 +1,29 @@
+# Immersity AI Documentation
+
+> Immersity AI API Documentation
+
+## Guides
+- [Getting Started with Immersity AI API](https://docs-api.immersity.ai/docs/getting-started.md): Immersity APIs offer developers a seamless and user-friendly experience through a set of powerful RESTful APIs. Harness the capabilities of our APIs to effortlessly generate disparity maps from 2D images and unlock the potential for creating breathtaking 3D animations from your 2D image collection.
+- [Advanced Topics](https://docs-api.immersity.ai/docs/advanced-topics.md): Here we cover topics for advanced users of the API
+- [Release Notes](https://docs-api.immersity.ai/docs/release-notes.md)
+
+## API Reference
+- [Disparity Map](https://docs-api.immersity.ai/reference/transactioncontroller_estimatemonodepth-1.md): Historically, a disparity map is a visual representation of the differences in pixel coordinates between the corresponding points in a stereo image pair. It is typically generated from a pair of stereo images taken from slightly different viewpoints (left and right cameras). Using the power of the Immersity Cloud API, you can now generate a disparity map for any standard 2D image.
+- [Animation](https://docs-api.immersity.ai/reference/transactioncontroller_generateanimation-1.md): This API allows you to generate a captivating 3D animation. By utilizing the input disparity map and a single image, this generates an immersive 3D animation that adds depth and realism to the image.
+- [Stereo SBS](https://docs-api.immersity.ai/reference/transactioncontroller_generatestereosbs-1.md)
+- [Stereo Top-Bottom](https://docs-api.immersity.ai/reference/transactioncontroller_generatestereotopbottom-1.md)
+- [LIF Decoder](https://docs-api.immersity.ai/reference/transactioncontroller_decodelif-1.md): This API allows you to decode a LIF file into a 2D image.
+- [LIF Encoder](https://docs-api.immersity.ai/reference/transactioncontroller_encodelif-1.md): This API allows you to encode a 2D image into a LIF file.
+- [Get Presigned URL](https://docs-api.immersity.ai/reference/storagecontroller_getstoragepresignedurl-1.md): Get a presigned URL for uploading a file to Leia Storage with 24hrs expiration
+- [Get Access Token](https://docs-api.immersity.ai/reference/get-access-token-1.md): Use this endpoint to obtain an access token, using your client ID and secret. Please refer to the Getting Started guide to learn how to obtain them.
+
+## Recipes
+- [Generate Animation](https://docs-api.immersity.ai/recipes/generate-animation.md)
+- [Generate Disparity Map](https://docs-api.immersity.ai/recipes/generate-disparity-map.md)
+- [Get Access Token](https://docs-api.immersity.ai/recipes/get-access-token.md)
+
+## Pages
+- [Contacts](https://docs-api.immersity.ai/test-page-contacts.md)
+
+## Changelog
+- [Welcome to Immersity AI](https://docs-api.immersity.ai/changelog/welcome-to-leiapix.md)

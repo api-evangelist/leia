@@ -1,0 +1,57 @@
+generated: '2026-08-01'
+method: derived
+source: openapi/leia-immersity-cloud-api-openapi.yml
+spec_type: null
+spec_type_note: >-
+  Immersity publishes no AsyncAPI document. Probed /asyncapi.yaml, /asyncapi.json on api.immersity.ai and
+  docs-api.immersity.ai, the docs index (llms.txt) and the LeiaInc GitHub org — no event or streaming spec
+  exists. What does exist is an HTTP callback (webhook) surface on the long-running video operations, and it
+  is captured here rather than fabricated as AsyncAPI.
+surface: http-callback
+direction: provider-to-consumer
+delivery:
+  registration: per request — the caller supplies `callbackUrl` in the request body; there is no callback
+    registration/subscription API and no callback management console
+  transport: HTTPS POST from Immersity to the caller-supplied URL
+  authentication: not documented — no signing secret, signature header or mTLS scheme is published
+  retries: not documented
+  ordering: not documented
+callbacks:
+- name: video-conversion-completed
+  trigger: A 2D-to-3D video conversion job finishes or fails.
+  registered_by:
+    operation: TransactionController_generateVideoConversion
+    path: POST /api/v1/video
+    field: callbackUrl
+    required: true
+  correlation: correlationId (UUID) supplied on the originating request
+  result_location: the `resultPresignedUrl` supplied on the originating request
+  known_error_codes:
+  - ERROR_VIDEO_LENGTH_MISMATCH
+  payload_schema: not published
+- name: spatial-video-conversion-completed
+  trigger: An Apple Vision spatial video conversion job finishes or fails.
+  registered_by:
+    operation: TransactionController_generateSpatialVideoConversion
+    path: POST /api/v1/spatial
+    field: callbackUrl
+    required: true
+  correlation: correlationId (UUID) supplied on the originating request
+  result_location: the `resultPresignedUrl` supplied on the originating request
+  payload_schema: not published
+receiver_endpoint:
+  operation: TransactionController_transactionCallback
+  path: POST /api/v1/transaction/callback
+  note: >-
+    An inbound callback receiver is declared in the published OpenAPI on the Immersity side with request
+    schema TransactionCallbackParams. That schema is published as an empty object (no properties), so the
+    callback payload shape is undocumented in the contract.
+  responses:
+    '201': acknowledged
+gaps:
+- No AsyncAPI document.
+- No published callback payload schema (TransactionCallbackParams has zero properties).
+- No callback signature/verification scheme.
+- No retry, timeout or delivery-guarantee policy.
+- Image operations (disparity, animation, sbs, topBottom, encode, decode) are synchronous and have no
+  callback option.

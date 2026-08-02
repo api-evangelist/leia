@@ -1,0 +1,78 @@
+generated: '2026-08-01'
+method: searched
+source: openapi/leia-immersity-authentication-openapi.yml, openapi/leia-immersity-cloud-api-openapi.yml
+docs: https://docs-api.immersity.ai/docs/getting-started
+discovery: well-known/leia-openid-configuration.json
+summary:
+  types:
+  - oauth2
+  - http
+  - apiKey
+  api_key_in:
+  - query
+  oauth2_flows:
+  - clientCredentials
+  primary: OAuth 2.0 client-credentials bearer token (JWT) issued by the Immersity Keycloak realm
+model: >-
+  Immersity AI uses the OAuth 2.0 client-credentials flow. A developer creates client ID / secret pairs on
+  the Immersity account page (Leia Account > Manage Account > API tab), POSTs them to the Keycloak realm
+  token endpoint with grant_type=client_credentials, and sends the returned JWT as
+  `Authorization: Bearer <access_token>` on every Immersity Cloud API call. There is no separate API-key
+  header; credentials must never be embedded in client code and should be rotated periodically per the
+  provider's published guidance.
+issuer: https://auth.immersity.ai/auth/realms/immersity
+endpoints:
+  token: https://auth.immersity.ai/auth/realms/immersity/protocol/openid-connect/token
+  authorization: https://auth.immersity.ai/auth/realms/immersity/protocol/openid-connect/auth
+  introspection: https://auth.immersity.ai/auth/realms/immersity/protocol/openid-connect/token/introspect
+  userinfo: https://auth.immersity.ai/auth/realms/immersity/protocol/openid-connect/userinfo
+  jwks: https://auth.immersity.ai/auth/realms/immersity/protocol/openid-connect/certs
+  registration: https://auth.immersity.ai/auth/realms/immersity/clients-registrations/openid-connect
+  device_authorization: https://auth.immersity.ai/auth/realms/immersity/protocol/openid-connect/auth/device
+  pushed_authorization_request: https://auth.immersity.ai/auth/realms/immersity/protocol/openid-connect/ext/par/request
+  end_session: https://auth.immersity.ai/auth/realms/immersity/protocol/openid-connect/logout
+  account_management: https://auth.immersity.ai/auth/realms/immersity/account
+grant_types_supported:
+- authorization_code
+- client_credentials
+- implicit
+- password
+- refresh_token
+- urn:ietf:params:oauth:grant-type:device_code
+- urn:ietf:params:oauth:grant-type:token-exchange
+- urn:ietf:params:oauth:grant-type:uma-ticket
+- urn:openid:params:grant-type:ciba
+code_challenge_methods_supported:
+- plain
+- S256
+schemes:
+- name: bearer
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+  applied_to: all Immersity Cloud API operations
+  sources:
+  - openapi/leia-immersity-cloud-api-openapi.yml
+- name: sec0
+  type: apiKey
+  in: query
+  parameter: api_key
+  note: >-
+    Present in the published authentication OpenAPI document as a document-level default. The token
+    endpoint itself is called with client_id/client_secret form parameters, not an api_key query string;
+    treat this scheme as a documentation-platform default rather than a live requirement.
+  sources:
+  - openapi/leia-immersity-authentication-openapi.yml
+credential_management:
+  console: https://auth.immersity.ai/auth/realms/immersity/account
+  path: Leia Account > Manage Account > API tab > add Client ID / Secret Key pair
+  guidance:
+  - Store client credentials in encrypted storage or a secure key-management system
+  - Do not hard-code credentials in application code or config files
+  - Rotate client secrets periodically
+x-evidence:
+  fetched: '2026-08-01'
+  urls:
+  - https://docs-api.immersity.ai/docs/getting-started
+  - https://auth.immersity.ai/auth/realms/immersity/.well-known/openid-configuration
+  http_status: 200

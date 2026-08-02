@@ -1,0 +1,97 @@
+generated: '2026-08-01'
+method: searched
+source: openapi/leia-immersity-cloud-api-openapi.yml
+docs: https://docs-api.immersity.ai/docs/getting-started
+api: Immersity Cloud API
+authentication:
+  style: OAuth 2.0 client-credentials bearer JWT
+  header: 'Authorization: Bearer <access_token>'
+  token_endpoint: https://auth.immersity.ai/auth/realms/immersity/protocol/openid-connect/token
+  detail: authentication/leia-authentication.yml
+transport:
+  base_url: https://api.immersity.ai
+  alternate_base_url: https://api.leiapix.com
+  content_type: application/json
+  style: RPC-flavored REST — one POST per transformation verb (/disparity, /animation, /sbs, /topBottom,
+    /encode, /decode, /video, /spatial) plus two GET reads (/prices, /get-upload-url)
+result_delivery:
+  model: presigned-URL write-back
+  description: >-
+    The caller supplies `resultPresignedUrl`, a cloud-storage URL carrying HTTP PUT permission, and the
+    service writes the generated artifact directly to it rather than returning binary in the response body.
+    Inputs are likewise passed by URL (`inputImageUrl`, `inputDisparityUrl`, `inputVideoUrl`). The 200
+    response echoes `correlationId` and `resultPresignedUrl`.
+  provider_helper: GET /api/v1/get-upload-url (StorageController_getStoragePresignedUrl) mints a Leia Storage
+    presigned URL valid for 24 hours, returned as {url, urlExpiresUTC}
+  supported_storage: AWS S3 presigned URLs, GCP Cloud Storage signed URLs, Azure Blob SAS
+request_tracing:
+  field: correlationId
+  location: request body (and echoed in the 200 response body)
+  format: UUID
+  required: false
+  behavior: >-
+    "UUID to correlate this request. This must be unique for each request. If not provided, the service will
+    generate one." Used to correlate the request, the callback and the written artifact.
+idempotency:
+  supported: false
+  note: >-
+    Immersity publishes no idempotency key and no replay contract. `correlationId` is explicitly documented
+    as a per-request unique correlation identifier, not a deduplication key — resubmitting the same
+    correlationId is not documented as returning the first result, and every accepted call consumes credits.
+    Recorded as absent rather than mapped onto correlationId.
+asynchrony:
+  synchronous: image operations (disparity, animation, sbs, topBottom, encode, decode) return within the
+    request; the documented client timeout is 3-5 minutes
+  callback: video operations (/api/v1/video, /api/v1/spatial) require a `callbackUrl` and notify it when
+    processing completes or fails
+  callback_catalog: asyncapi/leia-callbacks.yml
+pagination:
+  supported: false
+  note: no collection/list endpoints in the published surface — every operation is a single transformation
+    or a single read
+filtering_and_expansion:
+  supported: false
+metering:
+  model: prepaid credits
+  unit: credit
+  documented_rate: 10 credits per API call flat rate; 100 free credits granted to a new account
+  free_credit_restriction: free credits may not be used for commercial purposes
+  price_lookup: GET /api/v1/prices (ProductPricingController_getPrices) returns current disparity and
+    animation prices
+  pre_authorization: >-
+    Video conversions require the caller to send `videoLength` and a pre-calculated `creditAmount`; both are
+    verified server-side and a mismatch rejects the request (ERROR_VIDEO_LENGTH_MISMATCH is returned on the
+    callback payload).
+  insufficient_funds: HTTP 402 on every credit-consuming operation
+versioning:
+  scheme: uri-path
+  current: v1
+  spec_version: 3.1.1
+  detail: lifecycle/leia-lifecycle.yml
+error_envelope:
+  format: undocumented
+  note: >-
+    The published OpenAPI declares 400/401/402 responses with prose descriptions but no response schema and
+    no media type, so the error body shape is not specified. Errors are not RFC 9457 problem+json. Video
+    conversion failures surface as string error codes (e.g. ERROR_VIDEO_LENGTH_MISMATCH) in the callback
+    payload.
+  detail: errors/leia-problem-types.yml
+rate_limiting:
+  documented: false
+  note: no published rate-limit policy or rate-limit response headers; throughput is governed by the credit
+    balance rather than a request-per-second limit
+support:
+  channel: https://discord.gg/immersityai
+cross_links:
+  authentication: authentication/leia-authentication.yml
+  scopes: scopes/leia-scopes.yml
+  errors: errors/leia-problem-types.yml
+  lifecycle: lifecycle/leia-lifecycle.yml
+  data_model: data-model/leia-data-model.yml
+  callbacks: asyncapi/leia-callbacks.yml
+x-evidence:
+  fetched: '2026-08-01'
+  urls:
+  - https://docs-api.immersity.ai/docs/getting-started
+  - https://docs-api.immersity.ai/llms.txt
+  http_status: 200

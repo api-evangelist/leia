@@ -1,0 +1,60 @@
+generated: '2026-08-01'
+method: derived
+status: candidate
+source: openapi/leia-immersity-cloud-api-openapi.yml
+notes: >-
+  No official hosted or remote Immersity/Leia MCP server was found. Probed mcp.immersity.ai/mcp (no DNS),
+  api.immersity.ai/mcp (302 to docs), immersity.ai/mcp (405), mcp.leiainc.com (no DNS), the docs index
+  (llms.txt), the LeiaInc GitHub org and npm. The tool list below is a CANDIDATE derived one-to-one from the
+  published Immersity Cloud API operations; each tool's real input schema is the referenced operation's
+  requestBody/parameters in the OpenAPI. Auth for any such server would be the OAuth 2.0 client-credentials
+  bearer token described in authentication/leia-authentication.yml.
+server:
+  name: immersity
+  transport: http
+  url: null
+tools:
+- name: get_prices
+  description: Get current credit prices for all Immersity products.
+  source_operation: openapi/leia-immersity-cloud-api-openapi.yml#ProductPricingController_getPrices
+- name: get_upload_url
+  description: Mint a Leia Storage presigned upload URL valid for 24 hours.
+  source_operation: openapi/leia-immersity-cloud-api-openapi.yml#StorageController_getStoragePresignedUrl
+- name: estimate_disparity_map
+  description: Generate a disparity (depth) map from a single 2D image.
+  source_operation: openapi/leia-immersity-cloud-api-openapi.yml#TransactionController_estimateMonoDepth
+- name: generate_animation
+  description: Generate a 3D parallax animation (mp4 or gif) from an image plus its disparity map.
+  source_operation: openapi/leia-immersity-cloud-api-openapi.yml#TransactionController_generateAnimation
+- name: generate_stereo_sbs
+  description: Render a side-by-side (or anaglyph/spatial) stereo image.
+  source_operation: openapi/leia-immersity-cloud-api-openapi.yml#TransactionController_generateStereoSbs
+- name: generate_stereo_top_bottom
+  description: Render a top-bottom stereo image.
+  source_operation: openapi/leia-immersity-cloud-api-openapi.yml#TransactionController_generateStereoTopBottom
+- name: encode_lif
+  description: Encode image(s) and disparity map(s) into a Leia Image Format (LIF) file.
+  source_operation: openapi/leia-immersity-cloud-api-openapi.yml#TransactionController_encodeLif
+- name: decode_lif
+  description: Decode a LIF file back into a 2D image.
+  source_operation: openapi/leia-immersity-cloud-api-openapi.yml#TransactionController_decodeLif
+- name: convert_video_2d_to_3d
+  description: Convert a 2D video to sbs/tb/depth/anaglyph 3D output; notifies a callbackUrl on completion.
+  source_operation: openapi/leia-immersity-cloud-api-openapi.yml#TransactionController_generateVideoConversion
+- name: convert_video_to_spatial
+  description: Convert a video to Apple Vision spatial video; notifies a callbackUrl on completion.
+  source_operation: openapi/leia-immersity-cloud-api-openapi.yml#TransactionController_generateSpatialVideoConversion
+excluded_operations:
+- operation: TransactionController_transactionCallback
+  reason: inbound callback receiver on the provider side, not a caller-invocable capability
+x-evidence:
+  probed: '2026-08-01'
+  endpoints:
+  - url: https://mcp.immersity.ai/mcp
+    result: DNS resolution failed
+  - url: https://api.immersity.ai/mcp
+    result: '302'
+  - url: https://immersity.ai/mcp
+    result: '405'
+  - url: https://mcp.leiainc.com/mcp
+    result: DNS resolution failed

@@ -1,0 +1,212 @@
+generated: '2026-08-01'
+method: searched
+source: openapi/leia-immersity-authentication-openapi.yml, openapi/leia-immersity-cloud-api-openapi.yml
+description: Recommended x-agentic-access execution contracts for the Immersity Cloud API. Classified from the OpenAPI,
+  then curated against the published metering and result-delivery model. A governance starting point — bind audience
+  per deployment.
+summary:
+  operations: 12
+  by_action_class:
+    acting: 10
+    connected: 2
+  by_consequence:
+    write: 10
+    read: 2
+  human_in_the_loop_required: 0
+operations:
+- path: /protocol/openid-connect/token
+  method: post
+  operationId: get-access-token-1
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/v1/prices
+  method: get
+  operationId: ProductPricingController_getPrices
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/v1/disparity
+  method: post
+  operationId: TransactionController_estimateMonoDepth
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - high-value
+      - abnormal
+    audit: required
+    note: credit-metered media transformation; writes to a caller-supplied presigned URL
+- path: /api/v1/animation
+  method: post
+  operationId: TransactionController_generateAnimation
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - high-value
+      - abnormal
+    audit: required
+    note: credit-metered media transformation; writes to a caller-supplied presigned URL
+- path: /api/v1/transaction/callback
+  method: post
+  operationId: TransactionController_transactionCallback
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - high-value
+      - abnormal
+    audit: required
+    note: credit-metered media transformation; writes to a caller-supplied presigned URL
+- path: /api/v1/sbs
+  method: post
+  operationId: TransactionController_generateStereoSbs
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - high-value
+      - abnormal
+    audit: required
+    note: credit-metered media transformation; writes to a caller-supplied presigned URL
+- path: /api/v1/topBottom
+  method: post
+  operationId: TransactionController_generateStereoTopBottom
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - high-value
+      - abnormal
+    audit: required
+    note: credit-metered media transformation; writes to a caller-supplied presigned URL
+- path: /api/v1/decode
+  method: post
+  operationId: TransactionController_decodeLif
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - high-value
+      - abnormal
+    audit: required
+    note: credit-metered media transformation; writes to a caller-supplied presigned URL
+- path: /api/v1/encode
+  method: post
+  operationId: TransactionController_encodeLif
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - high-value
+      - abnormal
+    audit: required
+    note: credit-metered media transformation; writes to a caller-supplied presigned URL
+- path: /api/v1/video
+  method: post
+  operationId: TransactionController_generateVideoConversion
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - high-value
+      - abnormal
+    audit: required
+    note: credit-metered media transformation; writes to a caller-supplied presigned URL
+- path: /api/v1/spatial
+  method: post
+  operationId: TransactionController_generateSpatialVideoConversion
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - high-value
+      - abnormal
+    audit: required
+    note: credit-metered media transformation; writes to a caller-supplied presigned URL
+- path: /api/v1/get-upload-url
+  method: get
+  operationId: StorageController_getStoragePresignedUrl
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+curation: 'Curated correction of the heuristic pass. The mechanical classifier raised nine operations to consequence:
+  safety-critical because their NestJS-style operationIds contain the substring ''Controller'', which matched the
+  control/stop/dispatch keyword rule. Nothing in the Immersity Cloud API is physical or safety-critical: every write
+  is a media transformation that spends prepaid credits and writes a file to a caller-supplied presigned URL. Those
+  nine are reclassified to consequence: write, with human-in-the-loop conditional on high-value spend, since the
+  real agent risk is credit consumption (each call is metered, 402 on empty balance) and writing to caller-controlled
+  storage.'
