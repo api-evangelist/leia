@@ -15,7 +15,7 @@ image: https://cdn.prod.website-files.com/684b15b38863077bd3c46420/6895344cc4683
 url: https://raw.githubusercontent.com/api-evangelist/leia/refs/heads/main/apis.yml
 x-type: company
 x-source: harvest:secondary-market
-specificationVersion: '0.21'
+specificationVersion: '0.23'
 created: '2026-08-01'
 modified: '2026-08-01'
 tags:
