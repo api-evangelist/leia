@@ -2,11 +2,10 @@ generated: '2026-08-01'
 method: derived
 status: candidate
 source: openapi/leia-immersity-cloud-api-openapi.yml
-notes: >-
-  No official hosted or remote Immersity/Leia MCP server was found. Probed mcp.immersity.ai/mcp (no DNS),
-  api.immersity.ai/mcp (302 to docs), immersity.ai/mcp (405), mcp.leiainc.com (no DNS), the docs index
-  (llms.txt), the LeiaInc GitHub org and npm. The tool list below is a CANDIDATE derived one-to-one from the
-  published Immersity Cloud API operations; each tool's real input schema is the referenced operation's
+notes: No official hosted or remote Immersity/Leia MCP server was found. Probed mcp.immersity.ai/mcp (no
+  DNS), api.immersity.ai/mcp (302 to docs), immersity.ai/mcp (405), mcp.leiainc.com (no DNS), the docs
+  index (llms.txt), the LeiaInc GitHub org and npm. The tool list below is a CANDIDATE derived one-to-one
+  from the published Immersity Cloud API operations; each tool's real input schema is the referenced operation's
   requestBody/parameters in the OpenAPI. Auth for any such server would be the OAuth 2.0 client-credentials
   bearer token described in authentication/leia-authentication.yml.
 server:
@@ -58,3 +57,9 @@ x-evidence:
     result: '405'
   - url: https://mcp.leiainc.com/mcp
     result: DNS resolution failed
+deployment:
+  mode: none
+  verified: derived
+  tools: 10
+  checked: '2026-08-12'
+  source: catalog MCP census

@@ -1,0 +1,2518 @@
+{
+  "item": [
+    {
+      "id": "0db45402-707b-47c0-83c1-d3fca1ac5c16",
+      "name": "Media Transformation",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3f19af54-9f51-40ef-a0d0-09a489b41247",
+          "name": "Disparity Map",
+          "request": {
+            "name": "Disparity Map",
+            "description": {
+              "content": "Historically, a disparity map is a visual representation of the differences in pixel coordinates between the corresponding points in a stereo image pair. It is typically generated from a pair of stereo images taken from slightly different viewpoints (left and right cameras). Using the power of the Immersity Cloud API, you can now generate a disparity map for any standard 2D image.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "disparity"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"inputImageUrl\": \"<string>\",\n  \"resultPresignedUrl\": \"<string>\",\n  \"correlationId\": \"<string>\",\n  \"dilation\": 0.0063,\n  \"inputType\": \"image2d\",\n  \"outputBitDepth\": \"uint8\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "68aa856b-8a0b-4687-b19f-a9e5342bd807",
+              "name": "The request has succeeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "disparity"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inputImageUrl\": \"https://...\",\n  \"resultPresignedUrl\": \"https://...\",\n  \"correlationId\": \"4d4eb584-a5cd-453b-8b67-567c1df26cb4\",\n  \"dilation\": 0.0063,\n  \"inputType\": \"image2d\",\n  \"outputBitDepth\": \"uint8\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"correlationId\": \"123e4567-e89b-12d3-a456-426614174000\",\n  \"resultPresignedUrl\": \"https://s3.eu-central-1.amazonaws.com/3d-photo-api-dev-output/1.jpg\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "672b487a-9617-44d6-bfbb-c778c5b54ee0",
+              "name": "The request has invalid parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "disparity"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inputImageUrl\": \"https://...\",\n  \"resultPresignedUrl\": \"https://...\",\n  \"correlationId\": \"4d4eb584-a5cd-453b-8b67-567c1df26cb4\",\n  \"dilation\": 0.0063,\n  \"inputType\": \"image2d\",\n  \"outputBitDepth\": \"uint8\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "cde392d0-26ff-4b71-9d32-1f90a6fb1e70",
+              "name": "Returned if the user is not authenticated or authentication parameters are invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "disparity"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inputImageUrl\": \"https://...\",\n  \"resultPresignedUrl\": \"https://...\",\n  \"correlationId\": \"4d4eb584-a5cd-453b-8b67-567c1df26cb4\",\n  \"dilation\": 0.0063,\n  \"inputType\": \"image2d\",\n  \"outputBitDepth\": \"uint8\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "dd3823d8-b74a-44c3-b47a-7518519e4e9a",
+              "name": "Returned it there is not enough credit balance",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "disparity"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inputImageUrl\": \"https://...\",\n  \"resultPresignedUrl\": \"https://...\",\n  \"correlationId\": \"4d4eb584-a5cd-453b-8b67-567c1df26cb4\",\n  \"dilation\": 0.0063,\n  \"inputType\": \"image2d\",\n  \"outputBitDepth\": \"uint8\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "efd24d49-4cfb-4e6b-a52a-85aca027adf2",
+          "name": "Animation",
+          "request": {
+            "name": "Animation",
+            "description": {
+              "content": "This API allows you to generate a captivating 3D animation. By utilizing the input disparity map and a single image, this generates an immersive 3D animation that adds depth and realism to the image.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "animation"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"inputImageUrl\": \"<string>\",\n  \"inputDisparityUrl\": \"<string>\",\n  \"resultPresignedUrl\": \"<string>\",\n  \"correlationId\": \"<string>\",\n  \"animationType\": \"mp4\",\n  \"pattern\": \"<string>\",\n  \"animationLength\": 4,\n  \"outputWidth\": \"Equals to input width\",\n  \"outputHeight\": \"Equals to input height\",\n  \"amplitudeX\": 1,\n  \"amplitudeY\": 1,\n  \"amplitudeZ\": 1,\n  \"phaseX\": 0,\n  \"phaseY\": 0.25,\n  \"phaseZ\": 0.25,\n  \"gain\": \"Gain is estimated automatically based on input image for best results\",\n  \"convergence\": \"Convergence is estimated automatically based on input image for best results\",\n  \"numberOfLoops\": 0,\n  \"outputFps\": \"auto\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "96824d20-d6eb-46ba-bec7-48d031bb32ef",
+              "name": "The request has succeeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "animation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inputImageUrl\": \"https://...\",\n  \"inputDisparityUrl\": \"https://...\",\n  \"resultPresignedUrl\": \"https://...\",\n  \"correlationId\": \"4d4eb584-a5cd-453b-8b67-567c1df26cb4\",\n  \"animationType\": \"mp4\",\n  \"pattern\": \"{0.0, 0.0, 0.0, 0.0, 0.0, 0.0}\",\n  \"animationLength\": 4,\n  \"outputWidth\": 600,\n  \"outputHeight\": 450,\n  \"amplitudeX\": 1,\n  \"amplitudeY\": 1,\n  \"amplitudeZ\": 1,\n  \"phaseX\": 0,\n  \"phaseY\": 0.25,\n  \"phaseZ\": 0.25,\n  \"gain\": \"Gain is estimated automatically based on input image for best results\",\n  \"convergence\": \"Convergence is estimated automatically based on input image for best results\",\n  \"numberOfLoops\": 0,\n  \"outputFps\": \"auto\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"correlationId\": \"123e4567-e89b-12d3-a456-426614174000\",\n  \"resultPresignedUrl\": \"https://s3.eu-central-1.amazonaws.com/3d-photo-api-dev-output/1.jpg\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "95a13388-b22a-473e-b01d-104512241130",
+              "name": "The request has invalid parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "animation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inputImageUrl\": \"https://...\",\n  \"inputDisparityUrl\": \"https://...\",\n  \"resultPresignedUrl\": \"https://...\",\n  \"correlationId\": \"4d4eb584-a5cd-453b-8b67-567c1df26cb4\",\n  \"animationType\": \"mp4\",\n  \"pattern\": \"{0.0, 0.0, 0.0, 0.0, 0.0, 0.0}\",\n  \"animationLength\": 4,\n  \"outputWidth\": 600,\n  \"outputHeight\": 450,\n  \"amplitudeX\": 1,\n  \"amplitudeY\": 1,\n  \"amplitudeZ\": 1,\n  \"phaseX\": 0,\n  \"phaseY\": 0.25,\n  \"phaseZ\": 0.25,\n  \"gain\": \"Gain is estimated automatically based on input image for best results\",\n  \"convergence\": \"Convergence is estimated automatically based on input image for best results\",\n  \"numberOfLoops\": 0,\n  \"outputFps\": \"auto\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4f79a742-2a44-46f0-b7d4-8fc1a54291cf",
+              "name": "Returned if the user is not authenticated or authentication parameters are invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "animation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inputImageUrl\": \"https://...\",\n  \"inputDisparityUrl\": \"https://...\",\n  \"resultPresignedUrl\": \"https://...\",\n  \"correlationId\": \"4d4eb584-a5cd-453b-8b67-567c1df26cb4\",\n  \"animationType\": \"mp4\",\n  \"pattern\": \"{0.0, 0.0, 0.0, 0.0, 0.0, 0.0}\",\n  \"animationLength\": 4,\n  \"outputWidth\": 600,\n  \"outputHeight\": 450,\n  \"amplitudeX\": 1,\n  \"amplitudeY\": 1,\n  \"amplitudeZ\": 1,\n  \"phaseX\": 0,\n  \"phaseY\": 0.25,\n  \"phaseZ\": 0.25,\n  \"gain\": \"Gain is estimated automatically based on input image for best results\",\n  \"convergence\": \"Convergence is estimated automatically based on input image for best results\",\n  \"numberOfLoops\": 0,\n  \"outputFps\": \"auto\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e024bd37-8e62-4b27-9cba-34f7af58fd28",
+              "name": "Returned it there is not enough credit balance",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "animation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inputImageUrl\": \"https://...\",\n  \"inputDisparityUrl\": \"https://...\",\n  \"resultPresignedUrl\": \"https://...\",\n  \"correlationId\": \"4d4eb584-a5cd-453b-8b67-567c1df26cb4\",\n  \"animationType\": \"mp4\",\n  \"pattern\": \"{0.0, 0.0, 0.0, 0.0, 0.0, 0.0}\",\n  \"animationLength\": 4,\n  \"outputWidth\": 600,\n  \"outputHeight\": 450,\n  \"amplitudeX\": 1,\n  \"amplitudeY\": 1,\n  \"amplitudeZ\": 1,\n  \"phaseX\": 0,\n  \"phaseY\": 0.25,\n  \"phaseZ\": 0.25,\n  \"gain\": \"Gain is estimated automatically based on input image for best results\",\n  \"convergence\": \"Convergence is estimated automatically based on input image for best results\",\n  \"numberOfLoops\": 0,\n  \"outputFps\": \"auto\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e9e37dcb-1695-4af9-9777-8de789c46c67",
+          "name": "Transaction Controller transaction Callback",
+          "request": {
+            "name": "Transaction Controller transaction Callback",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "transaction",
+                "callback"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "919c859f-f934-486c-b5cb-e575a17b0ed8",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "transaction",
+                    "callback"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4dc0b26f-4084-49fb-8555-9b2e25db6b94",
+          "name": "Stereo SBS",
+          "request": {
+            "name": "Stereo SBS",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "sbs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"inputImageUrl\": \"<string>\",\n  \"resultPresignedUrl\": \"<string>\",\n  \"correlationId\": \"<string>\",\n  \"inputDisparityUrl\": \"<string>\",\n  \"width\": \"Preserves original image width\",\n  \"height\": \"Preserves original image height\",\n  \"gain\": \"Gain is estimated automatically based on input image for best results\",\n  \"gainMultiplier\": \"<number>\",\n  \"convergence\": \"Convergence is estimated automatically based on input image for best results\",\n  \"outputType\": \"sbs\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "04b0ef75-0f7e-45dc-b859-eefb1195f7f7",
+              "name": "The request has succeeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "sbs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inputImageUrl\": \"https://...\",\n  \"resultPresignedUrl\": \"https://...\",\n  \"correlationId\": \"4d4eb584-a5cd-453b-8b67-567c1df26cb4\",\n  \"inputDisparityUrl\": \"https://...\",\n  \"width\": 600,\n  \"height\": 450,\n  \"gain\": \"Gain is estimated automatically based on input image for best results\",\n  \"gainMultiplier\": \"<number>\",\n  \"convergence\": \"Convergence is estimated automatically based on input image for best results\",\n  \"outputType\": \"sbs\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"correlationId\": \"123e4567-e89b-12d3-a456-426614174000\",\n  \"resultPresignedUrl\": \"https://s3.eu-central-1.amazonaws.com/3d-photo-api-dev-output/1.jpg\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cdfc7474-bc8c-4846-9ca3-af2554ef4406",
+              "name": "The request has invalid parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "sbs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inputImageUrl\": \"https://...\",\n  \"resultPresignedUrl\": \"https://...\",\n  \"correlationId\": \"4d4eb584-a5cd-453b-8b67-567c1df26cb4\",\n  \"inputDisparityUrl\": \"https://...\",\n  \"width\": 600,\n  \"height\": 450,\n  \"gain\": \"Gain is estimated automatically based on input image for best results\",\n  \"gainMultiplier\": \"<number>\",\n  \"convergence\": \"Convergence is estimated automatically based on input image for best results\",\n  \"outputType\": \"sbs\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d7bad05e-c83f-4fcf-96c7-8735442b4701",
+              "name": "Returned if the user is not authenticated or authentication parameters are invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "sbs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inputImageUrl\": \"https://...\",\n  \"resultPresignedUrl\": \"https://...\",\n  \"correlationId\": \"4d4eb584-a5cd-453b-8b67-567c1df26cb4\",\n  \"inputDisparityUrl\": \"https://...\",\n  \"width\": 600,\n  \"height\": 450,\n  \"gain\": \"Gain is estimated automatically based on input image for best results\",\n  \"gainMultiplier\": \"<number>\",\n  \"convergence\": \"Convergence is estimated automatically based on input image for best results\",\n  \"outputType\": \"sbs\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0775ccdc-aa03-4027-b778-b7b6a6d31786",
+              "name": "Returned it there is not enough credit balance",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "sbs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inputImageUrl\": \"https://...\",\n  \"resultPresignedUrl\": \"https://...\",\n  \"correlationId\": \"4d4eb584-a5cd-453b-8b67-567c1df26cb4\",\n  \"inputDisparityUrl\": \"https://...\",\n  \"width\": 600,\n  \"height\": 450,\n  \"gain\": \"Gain is estimated automatically based on input image for best results\",\n  \"gainMultiplier\": \"<number>\",\n  \"convergence\": \"Convergence is estimated automatically based on input image for best results\",\n  \"outputType\": \"sbs\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "56fa1118-041e-4ab9-a552-801cf1bbb433",
+          "name": "Stereo Top-Bottom",
+          "request": {
+            "name": "Stereo Top-Bottom",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "topBottom"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"inputImageUrl\": \"<string>\",\n  \"inputDisparityUrl\": \"<string>\",\n  \"resultPresignedUrl\": \"<string>\",\n  \"correlationId\": \"<string>\",\n  \"width\": \"Preserves original image width\",\n  \"height\": \"Preserves original image height\",\n  \"gain\": \"Gain is estimated automatically based on input image for best results\",\n  \"gainMultiplier\": \"<number>\",\n  \"convergence\": \"Convergence is estimated automatically based on input image for best results\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "108d6639-51c0-4a8c-b679-7bce775ea626",
+              "name": "The request has succeeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "topBottom"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inputImageUrl\": \"https://...\",\n  \"inputDisparityUrl\": \"https://...\",\n  \"resultPresignedUrl\": \"https://...\",\n  \"correlationId\": \"4d4eb584-a5cd-453b-8b67-567c1df26cb4\",\n  \"width\": 600,\n  \"height\": 450,\n  \"gain\": \"Gain is estimated automatically based on input image for best results\",\n  \"gainMultiplier\": \"<number>\",\n  \"convergence\": \"Convergence is estimated automatically based on input image for best results\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"correlationId\": \"123e4567-e89b-12d3-a456-426614174000\",\n  \"resultPresignedUrl\": \"https://s3.eu-central-1.amazonaws.com/3d-photo-api-dev-output/1.jpg\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "940e2560-2e2e-48a8-9705-f110b0b69961",
+              "name": "The request has invalid parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "topBottom"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inputImageUrl\": \"https://...\",\n  \"inputDisparityUrl\": \"https://...\",\n  \"resultPresignedUrl\": \"https://...\",\n  \"correlationId\": \"4d4eb584-a5cd-453b-8b67-567c1df26cb4\",\n  \"width\": 600,\n  \"height\": 450,\n  \"gain\": \"Gain is estimated automatically based on input image for best results\",\n  \"gainMultiplier\": \"<number>\",\n  \"convergence\": \"Convergence is estimated automatically based on input image for best results\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1227ab00-c196-40c6-a365-e00b51a787cf",
+              "name": "Returned if the user is not authenticated or authentication parameters are invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "topBottom"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inputImageUrl\": \"https://...\",\n  \"inputDisparityUrl\": \"https://...\",\n  \"resultPresignedUrl\": \"https://...\",\n  \"correlationId\": \"4d4eb584-a5cd-453b-8b67-567c1df26cb4\",\n  \"width\": 600,\n  \"height\": 450,\n  \"gain\": \"Gain is estimated automatically based on input image for best results\",\n  \"gainMultiplier\": \"<number>\",\n  \"convergence\": \"Convergence is estimated automatically based on input image for best results\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ad51384f-e02f-4858-b877-ada90045a901",
+              "name": "Returned it there is not enough credit balance",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "topBottom"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inputImageUrl\": \"https://...\",\n  \"inputDisparityUrl\": \"https://...\",\n  \"resultPresignedUrl\": \"https://...\",\n  \"correlationId\": \"4d4eb584-a5cd-453b-8b67-567c1df26cb4\",\n  \"width\": 600,\n  \"height\": 450,\n  \"gain\": \"Gain is estimated automatically based on input image for best results\",\n  \"gainMultiplier\": \"<number>\",\n  \"convergence\": \"Convergence is estimated automatically based on input image for best results\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9db3e674-b95b-4762-a377-65cc1cfc6105",
+          "name": "LIF Decoder",
+          "request": {
+            "name": "LIF Decoder",
+            "description": {
+              "content": "This API allows you to decode a LIF file into a 2D image.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "decode"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"inputImageUrl\": \"<string>\",\n  \"resultPresignedUrl\": \"<string>\",\n  \"correlationId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ec6ad516-0d89-4536-8c21-287510e6538b",
+              "name": "The request has succeeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "decode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inputImageUrl\": \"https://...\",\n  \"resultPresignedUrl\": \"https://...\",\n  \"correlationId\": \"4d4eb584-a5cd-453b-8b67-567c1df26cb4\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"correlationId\": \"123e4567-e89b-12d3-a456-426614174000\",\n  \"resultPresignedUrl\": \"https://s3.eu-central-1.amazonaws.com/3d-photo-api-dev-output/1.jpg\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5adc8e8c-8ed5-4914-b6c7-d4d07310c4c7",
+              "name": "The request has invalid parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "decode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inputImageUrl\": \"https://...\",\n  \"resultPresignedUrl\": \"https://...\",\n  \"correlationId\": \"4d4eb584-a5cd-453b-8b67-567c1df26cb4\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "aacdb920-26f1-4f3c-96a4-b1716c9c4bd6",
+              "name": "Returned if the user is not authenticated or authentication parameters are invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "decode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inputImageUrl\": \"https://...\",\n  \"resultPresignedUrl\": \"https://...\",\n  \"correlationId\": \"4d4eb584-a5cd-453b-8b67-567c1df26cb4\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9f728944-c6fd-466b-8292-80bd5642e192",
+              "name": "Returned it there is not enough credit balance",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "decode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inputImageUrl\": \"https://...\",\n  \"resultPresignedUrl\": \"https://...\",\n  \"correlationId\": \"4d4eb584-a5cd-453b-8b67-567c1df26cb4\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e8279c90-31ad-475d-87d7-0ef3c995ebac",
+          "name": "LIF Encoder",
+          "request": {
+            "name": "LIF Encoder",
+            "description": {
+              "content": "This API allows you to encode a 2D image into a LIF file.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "encode"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"resultPresignedUrl\": \"<string>\",\n  \"inputSingleImageUrl\": \"<string>\",\n  \"inputSingleDisparityUrl\": \"<string>\",\n  \"inputLeftImageUrl\": \"<string>\",\n  \"inputRightImageUrl\": \"<string>\",\n  \"inputLeftDisparityUrl\": \"<string>\",\n  \"inputRightDisparityUrl\": \"<string>\",\n  \"inputDisparitySource\": \"<string>\",\n  \"gain\": \"Gain is estimated automatically based on input image for best results\",\n  \"convergence\": \"Convergence is estimated automatically based on input image for best results\",\n  \"correlationId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "50aa9b51-30d0-4811-890f-8aa856ab7be1",
+              "name": "The request has succeeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "encode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"resultPresignedUrl\": \"https://...\",\n  \"inputSingleImageUrl\": \"https://...\",\n  \"inputSingleDisparityUrl\": \"https://...\",\n  \"inputLeftImageUrl\": \"https://...\",\n  \"inputRightImageUrl\": \"https://...\",\n  \"inputLeftDisparityUrl\": \"https://...\",\n  \"inputRightDisparityUrl\": \"https://...\",\n  \"inputDisparitySource\": \"<string>\",\n  \"gain\": \"Gain is estimated automatically based on input image for best results\",\n  \"convergence\": \"Convergence is estimated automatically based on input image for best results\",\n  \"correlationId\": \"4d4eb584-a5cd-453b-8b67-567c1df26cb4\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"correlationId\": \"123e4567-e89b-12d3-a456-426614174000\",\n  \"resultPresignedUrl\": \"https://s3.eu-central-1.amazonaws.com/3d-photo-api-dev-output/1.jpg\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "527c4ed8-d30b-4e0f-b4df-ac758d7304af",
+              "name": "The request has invalid parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "encode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"resultPresignedUrl\": \"https://...\",\n  \"inputSingleImageUrl\": \"https://...\",\n  \"inputSingleDisparityUrl\": \"https://...\",\n  \"inputLeftImageUrl\": \"https://...\",\n  \"inputRightImageUrl\": \"https://...\",\n  \"inputLeftDisparityUrl\": \"https://...\",\n  \"inputRightDisparityUrl\": \"https://...\",\n  \"inputDisparitySource\": \"<string>\",\n  \"gain\": \"Gain is estimated automatically based on input image for best results\",\n  \"convergence\": \"Convergence is estimated automatically based on input image for best results\",\n  \"correlationId\": \"4d4eb584-a5cd-453b-8b67-567c1df26cb4\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b2ec332d-fd97-41be-bf4d-380f141da30d",
+              "name": "Returned if the user is not authenticated or authentication parameters are invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "encode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"resultPresignedUrl\": \"https://...\",\n  \"inputSingleImageUrl\": \"https://...\",\n  \"inputSingleDisparityUrl\": \"https://...\",\n  \"inputLeftImageUrl\": \"https://...\",\n  \"inputRightImageUrl\": \"https://...\",\n  \"inputLeftDisparityUrl\": \"https://...\",\n  \"inputRightDisparityUrl\": \"https://...\",\n  \"inputDisparitySource\": \"<string>\",\n  \"gain\": \"Gain is estimated automatically based on input image for best results\",\n  \"convergence\": \"Convergence is estimated automatically based on input image for best results\",\n  \"correlationId\": \"4d4eb584-a5cd-453b-8b67-567c1df26cb4\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "437cd18b-364f-4e0f-b897-337b23ca764c",
+              "name": "Returned it there is not enough credit balance",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "encode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"resultPresignedUrl\": \"https://...\",\n  \"inputSingleImageUrl\": \"https://...\",\n  \"inputSingleDisparityUrl\": \"https://...\",\n  \"inputLeftImageUrl\": \"https://...\",\n  \"inputRightImageUrl\": \"https://...\",\n  \"inputLeftDisparityUrl\": \"https://...\",\n  \"inputRightDisparityUrl\": \"https://...\",\n  \"inputDisparitySource\": \"<string>\",\n  \"gain\": \"Gain is estimated automatically based on input image for best results\",\n  \"convergence\": \"Convergence is estimated automatically based on input image for best results\",\n  \"correlationId\": \"4d4eb584-a5cd-453b-8b67-567c1df26cb4\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a7479325-49c0-4d3c-b7c6-a88047136f51",
+          "name": "2D to 3D Video Conversion",
+          "request": {
+            "name": "2D to 3D Video Conversion",
+            "description": {
+              "content": "This API allows you to convert a 2D video into 3D video. This service is an asynchronous only service, so despites it returns a 200 OK with resultPresignedUrl, the video will be available only after the conversion is done. The client must provide a custom callback URL to be notified when the conversion is done. Callback payload can include error code and error message.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "video"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"inputVideoUrl\": \"<string>\",\n  \"resultPresignedUrl\": \"<string>\",\n  \"videoLength\": \"<number>\",\n  \"creditAmount\": \"<number>\",\n  \"callbackUrl\": \"<string>\",\n  \"outputWidth\": \"<number>\",\n  \"outputHeight\": \"<number>\",\n  \"gain\": -1,\n  \"convergence\": 0,\n  \"dilateRatio\": 3,\n  \"outputType\": \"sbs\",\n  \"correlationId\": \"<string>\",\n  \"autoConvergence\": \"<boolean>\",\n  \"inputType\": \"regular\",\n  \"bitrate\": \"auto\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2ca3e3dc-ccfd-4ac1-a83c-efc0b430666b",
+              "name": "The request has succeeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "video"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inputVideoUrl\": \"https://...\",\n  \"resultPresignedUrl\": \"https://...\",\n  \"videoLength\": 10,\n  \"creditAmount\": 10,\n  \"callbackUrl\": \"https://...\",\n  \"outputWidth\": 1920,\n  \"outputHeight\": 1080,\n  \"gain\": -1,\n  \"convergence\": 0,\n  \"dilateRatio\": 3,\n  \"outputType\": \"sbs\",\n  \"correlationId\": \"4d4eb584-a5cd-453b-8b67-567c1df26cb1\",\n  \"autoConvergence\": true,\n  \"inputType\": \"regular\",\n  \"bitrate\": \"auto\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"correlationId\": \"123e4567-e89b-12d3-a456-426614174000\",\n  \"resultPresignedUrl\": \"https://s3.eu-central-1.amazonaws.com/3d-photo-api-dev-output/1.jpg\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "df7bba7e-907f-4d1a-93ae-6f6144b5e5ad",
+              "name": "The request has invalid parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "video"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inputVideoUrl\": \"https://...\",\n  \"resultPresignedUrl\": \"https://...\",\n  \"videoLength\": 10,\n  \"creditAmount\": 10,\n  \"callbackUrl\": \"https://...\",\n  \"outputWidth\": 1920,\n  \"outputHeight\": 1080,\n  \"gain\": -1,\n  \"convergence\": 0,\n  \"dilateRatio\": 3,\n  \"outputType\": \"sbs\",\n  \"correlationId\": \"4d4eb584-a5cd-453b-8b67-567c1df26cb1\",\n  \"autoConvergence\": true,\n  \"inputType\": \"regular\",\n  \"bitrate\": \"auto\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9c2ccd1a-165f-46be-ba3a-ec5882c945fd",
+              "name": "Returned if the user is not authenticated or authentication parameters are invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "video"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inputVideoUrl\": \"https://...\",\n  \"resultPresignedUrl\": \"https://...\",\n  \"videoLength\": 10,\n  \"creditAmount\": 10,\n  \"callbackUrl\": \"https://...\",\n  \"outputWidth\": 1920,\n  \"outputHeight\": 1080,\n  \"gain\": -1,\n  \"convergence\": 0,\n  \"dilateRatio\": 3,\n  \"outputType\": \"sbs\",\n  \"correlationId\": \"4d4eb584-a5cd-453b-8b67-567c1df26cb1\",\n  \"autoConvergence\": true,\n  \"inputType\": \"regular\",\n  \"bitrate\": \"auto\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5a858699-997c-4645-9d60-3c8c0d4d11a3",
+          "name": "Convert video to Apple Vision Spatial",
+          "request": {
+            "name": "Convert video to Apple Vision Spatial",
+            "description": {
+              "content": "This API allows you to convert a video into Apple Vision Spatial video. This service is an asynchronous only service, so despites it returns a 200 OK with resultPresignedUrl, the video will be available only after the conversion is done. The client must provide a custom callback URL to be notified when the conversion is done. Callback payload can include error code and error message.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "spatial"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"inputVideoUrl\": \"<string>\",\n  \"resultPresignedUrl\": \"<string>\",\n  \"videoLength\": \"<number>\",\n  \"creditAmount\": \"<number>\",\n  \"callbackUrl\": \"<string>\",\n  \"inputType\": \"sbs\",\n  \"correlationId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8d1b3a31-794f-43a5-8729-a0eea44cf925",
+              "name": "The request has succeeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "spatial"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inputVideoUrl\": \"https://...\",\n  \"resultPresignedUrl\": \"https://...\",\n  \"videoLength\": 10,\n  \"creditAmount\": 10,\n  \"callbackUrl\": \"https://...\",\n  \"inputType\": \"sbs\",\n  \"correlationId\": \"4d4eb584-a5cd-453b-8b67-567c1df26cb4\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"correlationId\": \"123e4567-e89b-12d3-a456-426614174000\",\n  \"resultPresignedUrl\": \"https://s3.eu-central-1.amazonaws.com/3d-photo-api-dev-output/1.jpg\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6e9847e6-5ece-4d41-bea9-168dbea0ce8f",
+              "name": "The request has invalid parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "spatial"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inputVideoUrl\": \"https://...\",\n  \"resultPresignedUrl\": \"https://...\",\n  \"videoLength\": 10,\n  \"creditAmount\": 10,\n  \"callbackUrl\": \"https://...\",\n  \"inputType\": \"sbs\",\n  \"correlationId\": \"4d4eb584-a5cd-453b-8b67-567c1df26cb4\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d4255650-152c-47f0-bf72-21d788117b60",
+              "name": "Returned if the user is not authenticated or authentication parameters are invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "spatial"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inputVideoUrl\": \"https://...\",\n  \"resultPresignedUrl\": \"https://...\",\n  \"videoLength\": 10,\n  \"creditAmount\": 10,\n  \"callbackUrl\": \"https://...\",\n  \"inputType\": \"sbs\",\n  \"correlationId\": \"4d4eb584-a5cd-453b-8b67-567c1df26cb4\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "43c43d75-24d4-4896-ab7a-72717c1e2a9b",
+      "name": "Storage",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2dccc833-7f8b-4603-95c6-44ae2753db53",
+          "name": "Get Presigned URL",
+          "request": {
+            "name": "Get Presigned URL",
+            "description": {
+              "content": "Get a presigned URL for uploading a file to Leia Storage with 24hrs expiration",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "get-upload-url"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "fileName",
+                  "value": "<string>",
+                  "description": "File name to upload"
+                },
+                {
+                  "disabled": false,
+                  "key": "mediaType",
+                  "value": "<string>",
+                  "description": "Mime type of the file to upload"
+                },
+                {
+                  "disabled": false,
+                  "key": "correlationId",
+                  "value": "<string>",
+                  "description": "Unique query identifier. If not provided, one will be generated"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "0b35e489-15b2-4bbd-89e4-80b4945c4276",
+              "name": "The request has succeeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "get-upload-url"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fileName",
+                      "value": "myFile.jpg"
+                    },
+                    {
+                      "key": "mediaType",
+                      "value": "image/jpeg"
+                    },
+                    {
+                      "key": "correlationId",
+                      "value": "123e4567-e89b-12d3-a456-426614174000"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"url\": \"https://leia-storage.s3.amazonaws.com/...\",\n  \"urlExpiresUTC\": \"2021-04-28T12:00:00.000Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8ca7e645-d032-470f-842c-ee60b3a9fa79",
+              "name": "The request has invalid parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "get-upload-url"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fileName",
+                      "value": "myFile.jpg"
+                    },
+                    {
+                      "key": "mediaType",
+                      "value": "image/jpeg"
+                    },
+                    {
+                      "key": "correlationId",
+                      "value": "123e4567-e89b-12d3-a456-426614174000"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e9f9eb5a-415c-400c-8fb1-b15754fa410a",
+              "name": "Returned if the user is not authenticated or authentication parameters are invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "get-upload-url"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fileName",
+                      "value": "myFile.jpg"
+                    },
+                    {
+                      "key": "mediaType",
+                      "value": "image/jpeg"
+                    },
+                    {
+                      "key": "correlationId",
+                      "value": "123e4567-e89b-12d3-a456-426614174000"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "50dc1fc6-c8aa-447c-b60b-919f6f2e7966",
+              "name": "Returned it there is not enough credit balance",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "get-upload-url"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fileName",
+                      "value": "myFile.jpg"
+                    },
+                    {
+                      "key": "mediaType",
+                      "value": "image/jpeg"
+                    },
+                    {
+                      "key": "correlationId",
+                      "value": "123e4567-e89b-12d3-a456-426614174000"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "f29c371b-4910-428c-97dd-964e55ec3b2d",
+      "name": "Product Pricing",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "52ccec53-db6d-4fa7-b68f-5040d0cd9933",
+          "name": "Get prices for all products",
+          "request": {
+            "name": "Get prices for all products",
+            "description": {
+              "content": "This endpoint returns prices for all products",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "prices"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "eae137a0-3ee2-4c0f-acbf-a97446e91171",
+              "name": "The prices have been successfully retrieved.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "prices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"disparity\": {\n    \"mono\": 5\n  },\n  \"animation\": {\n    \"gif\": 5,\n    \"mp4\": 5\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "76c49f43-15ac-465b-9064-a7ee87a71de0",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "prices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.immersity.ai",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "5f36b2ba-019e-4e4a-9302-79f91eae8800",
+    "name": "Immersity Cloud API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Immersity Cloud APIs provide a seamless and efficient way to leverage the power of computer vision and generate estimated disparity maps from 2D images. With just a simple API call, you can extract valuable depth information from your images, revealing the relative distances of objects in the scene.\n\nOur first API endpoint allows you to submit a 2D image and receive an estimated disparity map as the output. This disparity map highlights the variations in pixel disparities, enabling you to perceive the scene's depth and spatial layout. It opens up possibilities for applications such as 3D reconstruction, depth-based analysis, and more.\n\nBut that's not all! We go a step further by offering a second API endpoint that takes estimated disparity map and creates stunning 3D animations. Our API generates smooth and realistic 3D animations that bring your static images to life. With fine gain control over how obejcts should move within the scene, this unlocks a whole new realm of visual storytelling. \n\nOur REST APIs are designed to be user-friendly, scalable, and efficient, ensuring that you can seamlessly integrate them into your existing workflows or develop new applications. Experience the power of our APIs and unlock the potential of disparity maps and 3D animations in your projects today.\n\nYou will need Client ID & secret to access the APIs. Please refer to [Immersity Cloud Documentation](https://docs-api.immersity.ai/docs/getting-started) for more information. \n\nIf you have feedback or encounter any issues with the API, please reach out on [Discord](https://discord.gg/immersityai)\n\nContact Support:\n Name: Discord",
+      "type": "text/plain"
+    }
+  }
+}

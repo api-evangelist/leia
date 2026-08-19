@@ -1,0 +1,46 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "immersity-ai-authentication",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api_key",
+      "value": "{{api_key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Get Access Token",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://auth.immersity.ai/auth/realms/immersity/protocol/openid-connect/token",
+        "body": {
+          "type": "form-urlencoded",
+          "data": [
+            {
+              "name": "grant_type",
+              "value": ""
+            },
+            {
+              "name": "client_id",
+              "value": ""
+            },
+            {
+              "name": "client_secret",
+              "value": ""
+            }
+          ]
+        }
+      },
+      "docs": "Use this endpoint to obtain an access token, using your client ID and secret. Please refer to the Getting Started guide to learn how to obtain them."
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,250 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Immersity Cloud API",
+    "version": "3.1.1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Product Pricing",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get prices for all products",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.immersity.ai/api/v1/prices",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "This endpoint returns prices for all products"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Media Transformation",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Disparity Map",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.immersity.ai/api/v1/disparity",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Historically, a disparity map is a visual representation of the differences in pixel coordinates between the corresponding points in a stereo image pair. It is typically generated from a pair of stereo images taken from slightly different viewpoints (left and right cameras). Using the power of the Immersity Cloud API, you can now generate a disparity map for any standard 2D image."
+        },
+        {
+          "info": {
+            "name": "Animation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.immersity.ai/api/v1/animation",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "This API allows you to generate a captivating 3D animation. By utilizing the input disparity map and a single image, this generates an immersive 3D animation that adds depth and realism to the image."
+        },
+        {
+          "info": {
+            "name": "TransactionController_transactionCallback",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.immersity.ai/api/v1/transaction/callback",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "Stereo SBS",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.immersity.ai/api/v1/sbs",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Stereo SBS"
+        },
+        {
+          "info": {
+            "name": "Stereo Top-Bottom",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.immersity.ai/api/v1/topBottom",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Stereo Top-Bottom"
+        },
+        {
+          "info": {
+            "name": "LIF Decoder",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.immersity.ai/api/v1/decode",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "This API allows you to decode a LIF file into a 2D image."
+        },
+        {
+          "info": {
+            "name": "LIF Encoder",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.immersity.ai/api/v1/encode",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "This API allows you to encode a 2D image into a LIF file."
+        },
+        {
+          "info": {
+            "name": "2D to 3D Video Conversion",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.immersity.ai/api/v1/video",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "This API allows you to convert a 2D video into 3D video. This service is an asynchronous only service, so despites it returns a 200 OK with resultPresignedUrl, the video will be available only after the conversion is done. The client must provide a custom callback URL to be notified when the conversion is done. Callback payload can include error code and error message."
+        },
+        {
+          "info": {
+            "name": "Convert video to Apple Vision Spatial",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.immersity.ai/api/v1/spatial",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "This API allows you to convert a video into Apple Vision Spatial video. This service is an asynchronous only service, so despites it returns a 200 OK with resultPresignedUrl, the video will be available only after the conversion is done. The client must provide a custom callback URL to be notified when the conversion is done. Callback payload can include error code and error message."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Storage",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Presigned URL",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.immersity.ai/api/v1/get-upload-url",
+            "params": [
+              {
+                "name": "fileName",
+                "value": "myFile.jpg",
+                "type": "query",
+                "description": "File name to upload"
+              },
+              {
+                "name": "mediaType",
+                "value": "image/jpeg",
+                "type": "query",
+                "description": "Mime type of the file to upload"
+              },
+              {
+                "name": "correlationId",
+                "value": "123e4567-e89b-12d3-a456-426614174000",
+                "type": "query",
+                "description": "Unique query identifier. If not provided, one will be generated"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get a presigned URL for uploading a file to Leia Storage with 24hrs expiration"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
