@@ -19,6 +19,17 @@ specificationVersion: '0.23'
 created: '2026-08-01'
 modified: '2026-08-01'
 tags:
+- 3D
+- Spatial Computing
+- Computer-Vision
+- depth-estimation
+- Image Processing
+- Video Processing
+- Generative AI
+- Displays
+- media-transformation
+- Immersive Experiences
+tags_raw:
 - 3d
 - spatial-computing
 - computer-vision
@@ -40,6 +51,13 @@ apis:
   humanURL: https://docs-api.immersity.ai/docs/getting-started
   baseURL: https://api.immersity.ai
   tags:
+  - 3D
+  - Computer-Vision
+  - depth-estimation
+  - Image Processing
+  - Video Processing
+  - media-transformation
+  tags_raw:
   - 3d
   - computer-vision
   - depth-estimation
@@ -77,6 +95,9 @@ apis:
   humanURL: https://docs-api.immersity.ai/reference/get-access-token-1
   baseURL: https://auth.immersity.ai/auth/realms/immersity
   tags:
+  - Authentication
+  - OpenID Connect
+  tags_raw:
   - authentication
   - oauth2
   - openid-connect
