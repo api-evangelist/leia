@@ -41,32 +41,16 @@ tags_raw:
 - media-transformation
 - immersive-experiences
 apis:
-- name: Immersity Cloud API
-  description: >-
-    Credit-metered REST API for Spatial AI media transformation — estimate a disparity (depth) map from a
-    single 2D image, generate 3D animations from an image plus its disparity map, render stereo side-by-side
-    and top-bottom pairs, encode and decode Leia Image Format (LIF) files, convert 2D video to 3D or Apple
-    Vision spatial video, read product credit prices, and mint presigned Leia Storage upload URLs. Results
-    are written directly to a caller-supplied presigned URL; long-running video jobs notify a callbackUrl.
+- aid: leia:leia-media-transformation-api
+  name: Leia Media Transformation API
+  description: The Media Transformation API from Leia — 9 operation(s) for media transformation.
   humanURL: https://docs-api.immersity.ai/docs/getting-started
   baseURL: https://api.immersity.ai
   tags:
-  - 3D
-  - Computer-Vision
-  - depth-estimation
-  - Image Processing
-  - Video Processing
-  - media-transformation
-  tags_raw:
-  - 3d
-  - computer-vision
-  - depth-estimation
-  - image-processing
-  - video-processing
-  - media-transformation
+  - Media Transformation
   properties:
   - type: OpenAPI
-    url: openapi/leia-immersity-cloud-api-openapi.yml
+    url: openapi/leia-media-transformation-api-openapi.yml
   - type: Documentation
     url: https://docs-api.immersity.ai/docs/getting-started
   - type: APIReference
@@ -83,31 +67,112 @@ apis:
     url: data-model/leia-data-model.yml
   - type: Webhooks
     url: asyncapi/leia-callbacks.yml
-  - type: Overlay
-    url: overlays/leia-immersity-cloud-api-overlay.yaml
   - type: Examples
     url: examples/leia-immersity-cloud-api-examples.yml
-- name: Immersity AI Authentication API
-  description: >-
-    OAuth 2.0 / OpenID Connect token endpoint for the Immersity AI Keycloak realm. Exchange a client ID and
-    secret issued from the Immersity account page for a bearer access token using the client_credentials
-    grant; that token authorizes every Immersity Cloud API call.
-  humanURL: https://docs-api.immersity.ai/reference/get-access-token-1
-  baseURL: https://auth.immersity.ai/auth/realms/immersity
-  tags:
-  - Authentication
-  - OpenID Connect
-  tags_raw:
-  - authentication
-  - oauth2
-  - openid-connect
-  properties:
-  - type: OpenAPI
-    url: openapi/leia-immersity-authentication-openapi.yml
   - type: Documentation
     url: https://docs-api.immersity.ai/reference/get-access-token-1
+  - type: OAuthScopes
+    url: scopes/leia-scopes.yml
+  - type: OpenIDConnect
+    url: well-known/leia-openid-configuration.json
+- aid: leia:leia-product-pricing-api
+  name: Leia Product Pricing API
+  description: The Product Pricing API from Leia — 1 operation(s) for product pricing.
+  humanURL: https://docs-api.immersity.ai/docs/getting-started
+  baseURL: https://api.immersity.ai
+  tags:
+  - Product Pricing
+  properties:
+  - type: OpenAPI
+    url: openapi/leia-product-pricing-api-openapi.yml
+  - type: Documentation
+    url: https://docs-api.immersity.ai/docs/getting-started
+  - type: APIReference
+    url: https://docs-api.immersity.ai/reference/transactioncontroller_estimatemonodepth-1
+  - type: GettingStarted
+    url: https://docs-api.immersity.ai/docs/getting-started
   - type: Authentication
     url: authentication/leia-authentication.yml
+  - type: Conventions
+    url: conventions/leia-conventions.yml
+  - type: ErrorCatalog
+    url: errors/leia-problem-types.yml
+  - type: DataModel
+    url: data-model/leia-data-model.yml
+  - type: Webhooks
+    url: asyncapi/leia-callbacks.yml
+  - type: Examples
+    url: examples/leia-immersity-cloud-api-examples.yml
+  - type: Documentation
+    url: https://docs-api.immersity.ai/reference/get-access-token-1
+  - type: OAuthScopes
+    url: scopes/leia-scopes.yml
+  - type: OpenIDConnect
+    url: well-known/leia-openid-configuration.json
+- aid: leia:leia-protocol-api
+  name: Leia Protocol API
+  description: The Protocol API from Leia — 1 operation(s) for protocol.
+  humanURL: https://docs-api.immersity.ai/docs/getting-started
+  baseURL: https://api.immersity.ai
+  tags:
+  - Protocol
+  properties:
+  - type: OpenAPI
+    url: openapi/leia-protocol-api-openapi.yml
+  - type: Documentation
+    url: https://docs-api.immersity.ai/docs/getting-started
+  - type: APIReference
+    url: https://docs-api.immersity.ai/reference/transactioncontroller_estimatemonodepth-1
+  - type: GettingStarted
+    url: https://docs-api.immersity.ai/docs/getting-started
+  - type: Authentication
+    url: authentication/leia-authentication.yml
+  - type: Conventions
+    url: conventions/leia-conventions.yml
+  - type: ErrorCatalog
+    url: errors/leia-problem-types.yml
+  - type: DataModel
+    url: data-model/leia-data-model.yml
+  - type: Webhooks
+    url: asyncapi/leia-callbacks.yml
+  - type: Examples
+    url: examples/leia-immersity-cloud-api-examples.yml
+  - type: Documentation
+    url: https://docs-api.immersity.ai/reference/get-access-token-1
+  - type: OAuthScopes
+    url: scopes/leia-scopes.yml
+  - type: OpenIDConnect
+    url: well-known/leia-openid-configuration.json
+- aid: leia:leia-storage-api
+  name: Leia Storage API
+  description: The Storage API from Leia — 1 operation(s) for storage.
+  humanURL: https://docs-api.immersity.ai/docs/getting-started
+  baseURL: https://api.immersity.ai
+  tags:
+  - Storage
+  properties:
+  - type: OpenAPI
+    url: openapi/leia-storage-api-openapi.yml
+  - type: Documentation
+    url: https://docs-api.immersity.ai/docs/getting-started
+  - type: APIReference
+    url: https://docs-api.immersity.ai/reference/transactioncontroller_estimatemonodepth-1
+  - type: GettingStarted
+    url: https://docs-api.immersity.ai/docs/getting-started
+  - type: Authentication
+    url: authentication/leia-authentication.yml
+  - type: Conventions
+    url: conventions/leia-conventions.yml
+  - type: ErrorCatalog
+    url: errors/leia-problem-types.yml
+  - type: DataModel
+    url: data-model/leia-data-model.yml
+  - type: Webhooks
+    url: asyncapi/leia-callbacks.yml
+  - type: Examples
+    url: examples/leia-immersity-cloud-api-examples.yml
+  - type: Documentation
+    url: https://docs-api.immersity.ai/reference/get-access-token-1
   - type: OAuthScopes
     url: scopes/leia-scopes.yml
   - type: OpenIDConnect
@@ -118,6 +183,8 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: Overlay
+  url: overlays/leia-immersity-cloud-api-overlay.yaml
 - type: AgenticAccess
   url: agentic-access/leia-agentic-access.yml
 - type: DomainSecurity
