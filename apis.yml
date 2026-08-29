@@ -11,6 +11,18 @@ description: >-
   estimation, animation generation, stereo SBS and top-bottom rendering, LIF encode/decode, 2D-to-3D video
   conversion and presigned Leia Storage uploads. Formerly known as LeiaPix; the company acquired Dimenco
   and the Philips 3D patent portfolio in 2023 and holds 2,000+ patents.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: https://cdn.prod.website-files.com/684b15b38863077bd3c46420/6895344cc46838641181605c_OpenGraph_V1.png
 url: https://raw.githubusercontent.com/api-evangelist/leia/refs/heads/main/apis.yml
 x-type: company
