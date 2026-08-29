@@ -195,6 +195,9 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: CapabilityMap
+  url: capabilities/leia-capability-edges.yml
+  name: Leia Business Capability Map
 - type: Overlay
   url: overlays/leia-immersity-cloud-api-overlay.yaml
 - type: AgenticAccess

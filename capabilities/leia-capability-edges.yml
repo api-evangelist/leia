@@ -1,0 +1,26 @@
+slug: leia
+provider: Leia
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Media, Entertainment & Telecom Content
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 1
+edges:
+- tag: Media Transformation
+  spec_file: leia-media-transformation-api-openapi.yml
+  capability_id: BC-3710.40
+  capability_id_l1: BC-3710
+  capability_name: Transcoding & Format Conversion
+  confidence: 0.75
+  evidence: POST /api/v1/video '2D to 3D Video Conversion', POST /api/v1/encode 'LIF Encoder', POST /api/v1/sbs
+    'Stereo SBS', POST /api/v1/spatial 'Convert video to Apple Vision Spatial'
+  reason: Operations convert source images and video into alternate 3D/stereo renditions and container
+    formats (LIF encode/decode, SBS, top-bottom, spatial video) — media format conversion and rendition
+    production over media assets.
