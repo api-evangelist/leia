@@ -1,0 +1,65 @@
+openapi: 3.2.0
+info:
+  title: Immersity Cloud Product Pricing API
+  description: "Immersity Cloud APIs provide a seamless and efficient way to leverage the power of computer vision and generate estimated disparity maps from 2D images. With just a simple API call, you can extract valuable depth information from your images, revealing the relative distances of objects in the scene.\n\nOur first API endpoint allows you to submit a 2D image and receive an estimated disparity map as the output. This disparity map highlights the variations in pixel disparities, enabling you to perceive the scene's depth and spatial layout. It opens up possibilities for applications such as 3D reconstruction, depth-based analysis, and more.\n\nBut that's not all! We go a step further by offering a second API endpoint that takes estimated disparity map and creates stunning 3D animations. Our API generates smooth and realistic 3D animations that bring your static images to life. With fine gain control over how obejcts should move within the scene, this unlocks a whole new realm of visual storytelling. \n\nOur REST APIs are designed to be user-friendly, scalable, and efficient, ensuring that you can seamlessly integrate them into your existing workflows or develop new applications. Experience the power of our APIs and unlock the potential of disparity maps and 3D animations in your projects today.\n\nYou will need Client ID & secret to access the APIs. Please refer to [Immersity Cloud Documentation](https://docs-api.immersity.ai/docs/getting-started) for more information. \n\nIf you have feedback or encounter any issues with the API, please reach out on [Discord](https://discord.gg/immersityai)"
+  version: 3.1.1
+  contact:
+    name: Discord
+    url: https://discord.gg/immersityai
+    email: ''
+  termsOfService: https://www.immersity.ai/legal/terms-conditions
+servers:
+- url: https://api.immersity.ai
+- url: https://api.leiapix.com
+tags:
+- name: Product Pricing
+paths:
+  /api/v1/prices:
+    get:
+      operationId: ProductPricingController_getPrices
+      summary: Get prices for all products
+      description: This endpoint returns prices for all products
+      parameters: []
+      responses:
+        '200':
+          description: The prices have been successfully retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Prices'
+        '401':
+          description: Unauthorized
+      security:
+      - bearer: []
+      tags:
+      - Product Pricing
+components:
+  schemas:
+    Prices:
+      type: object
+      properties:
+        disparity:
+          type: object
+          description: The amount of credits for a single image
+          example:
+            mono: 5
+        animation:
+          type: object
+          description: The amount of credits for a single image
+          example:
+            gif: 5
+            mp4: 5
+      required:
+      - disparity
+      - animation
+  securitySchemes:
+    bearer:
+      scheme: bearer
+      bearerFormat: JWT
+      type: http
+externalDocs:
+  description: Find out more about Immersity Cloud
+  url: https://docs-api.immersity.ai/docs/getting-started
+x-readme:
+  explorer-enabled: true
+  proxy-enabled: true

@@ -1,0 +1,95 @@
+openapi: 3.2.0
+info:
+  title: Immersity Cloud Storage API
+  description: "Immersity Cloud APIs provide a seamless and efficient way to leverage the power of computer vision and generate estimated disparity maps from 2D images. With just a simple API call, you can extract valuable depth information from your images, revealing the relative distances of objects in the scene.\n\nOur first API endpoint allows you to submit a 2D image and receive an estimated disparity map as the output. This disparity map highlights the variations in pixel disparities, enabling you to perceive the scene's depth and spatial layout. It opens up possibilities for applications such as 3D reconstruction, depth-based analysis, and more.\n\nBut that's not all! We go a step further by offering a second API endpoint that takes estimated disparity map and creates stunning 3D animations. Our API generates smooth and realistic 3D animations that bring your static images to life. With fine gain control over how obejcts should move within the scene, this unlocks a whole new realm of visual storytelling. \n\nOur REST APIs are designed to be user-friendly, scalable, and efficient, ensuring that you can seamlessly integrate them into your existing workflows or develop new applications. Experience the power of our APIs and unlock the potential of disparity maps and 3D animations in your projects today.\n\nYou will need Client ID & secret to access the APIs. Please refer to [Immersity Cloud Documentation](https://docs-api.immersity.ai/docs/getting-started) for more information. \n\nIf you have feedback or encounter any issues with the API, please reach out on [Discord](https://discord.gg/immersityai)"
+  version: 3.1.1
+  contact:
+    name: Discord
+    url: https://discord.gg/immersityai
+    email: ''
+  termsOfService: https://www.immersity.ai/legal/terms-conditions
+servers:
+- url: https://api.immersity.ai
+- url: https://api.leiapix.com
+tags:
+- name: Storage
+  description: ''
+paths:
+  /api/v1/get-upload-url:
+    get:
+      operationId: StorageController_getStoragePresignedUrl
+      x-codeSamples:
+      - label: Python
+        lang: Python
+        source: "import uuid\nimport requests\ncorrelation_id = str(uuid.uuid4())\nrequests.get(\n    'https://api.immersity.ai/api/v1/get-upload-url',\n    headers={\n        'Authorization': 'Bearer {access_token}'  # acquired in previous step\n    },\n    timeout=5 * 60  # expires in 5 min\n)"
+      - label: Node.js
+        lang: javascript
+        source: "const uuid = require('uuid');\nconst axios = require('axios');\n\nconst correlationId = uuid.v4();\n\naxios.get(\n    'https://api.immersity.ai/api/v1/get-upload-url',\n    headers: {\n        Authorization: 'Bearer {accessToken}', // acquired in previous step\n    },\n    timeout: 5 * 60 * 1000, // expires in 5 min\n});\n    "
+      summary: Get Presigned URL
+      description: Get a presigned URL for uploading a file to Leia Storage with 24hrs expiration
+      parameters:
+      - name: fileName
+        required: false
+        in: query
+        description: File name to upload
+        example: myFile.jpg
+        schema:
+          type: string
+      - name: mediaType
+        required: false
+        in: query
+        description: Mime type of the file to upload
+        example: image/jpeg
+        schema:
+          type: string
+      - name: correlationId
+        required: false
+        in: query
+        description: Unique query identifier. If not provided, one will be generated
+        example: 123e4567-e89b-12d3-a456-426614174000
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The request has succeeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RESTStorageApiCallResult'
+        '400':
+          description: The request has invalid parameters
+        '401':
+          description: Returned if the user is not authenticated or authentication parameters are invalid
+        '402':
+          description: Returned it there is not enough credit balance
+      tags:
+      - Storage
+      security:
+      - bearer: []
+components:
+  schemas:
+    RESTStorageApiCallResult:
+      type: object
+      properties:
+        url:
+          type: string
+          description: Generated presigned URL for uploading a file to Leia Storage
+          example: https://leia-storage.s3.amazonaws.com/...
+        urlExpiresUTC:
+          type: string
+          description: Generated presigned URL expiration timestamp
+          example: '2021-04-28T12:00:00.000Z'
+      required:
+      - url
+      - urlExpiresUTC
+  securitySchemes:
+    bearer:
+      scheme: bearer
+      bearerFormat: JWT
+      type: http
+externalDocs:
+  description: Find out more about Immersity Cloud
+  url: https://docs-api.immersity.ai/docs/getting-started
+x-readme:
+  explorer-enabled: true
+  proxy-enabled: true

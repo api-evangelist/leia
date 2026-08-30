@@ -1,0 +1,786 @@
+openapi: 3.2.0
+info:
+  title: Immersity Cloud Media Transformation API
+  description: "Immersity Cloud APIs provide a seamless and efficient way to leverage the power of computer vision and generate estimated disparity maps from 2D images. With just a simple API call, you can extract valuable depth information from your images, revealing the relative distances of objects in the scene.\n\nOur first API endpoint allows you to submit a 2D image and receive an estimated disparity map as the output. This disparity map highlights the variations in pixel disparities, enabling you to perceive the scene's depth and spatial layout. It opens up possibilities for applications such as 3D reconstruction, depth-based analysis, and more.\n\nBut that's not all! We go a step further by offering a second API endpoint that takes estimated disparity map and creates stunning 3D animations. Our API generates smooth and realistic 3D animations that bring your static images to life. With fine gain control over how obejcts should move within the scene, this unlocks a whole new realm of visual storytelling. \n\nOur REST APIs are designed to be user-friendly, scalable, and efficient, ensuring that you can seamlessly integrate them into your existing workflows or develop new applications. Experience the power of our APIs and unlock the potential of disparity maps and 3D animations in your projects today.\n\nYou will need Client ID & secret to access the APIs. Please refer to [Immersity Cloud Documentation](https://docs-api.immersity.ai/docs/getting-started) for more information. \n\nIf you have feedback or encounter any issues with the API, please reach out on [Discord](https://discord.gg/immersityai)"
+  version: 3.1.1
+  contact:
+    name: Discord
+    url: https://discord.gg/immersityai
+    email: ''
+  termsOfService: https://www.immersity.ai/legal/terms-conditions
+servers:
+- url: https://api.immersity.ai
+- url: https://api.leiapix.com
+tags:
+- name: Media Transformation
+  description: ''
+paths:
+  /api/v1/disparity:
+    post:
+      operationId: TransactionController_estimateMonoDepth
+      x-codeSamples:
+      - label: Python
+        lang: Python
+        source: "import uuid\nimport requests\ncorrelation_id = str(uuid.uuid4())\nrequests.post(\n    'https://api.immersity.ai/api/v1/disparity', \n    headers={\n        'Authorization': 'Bearer {access_token}'  # acquired in previous step\n    },\n    json={\n        'correlationId': correlation_id,\n        'inputImageUrl': ORIGINAL_IMAGE_URL,  # this can be any image you want to get disparity for\n        'resultPresignedUrl': put_disparity_presigned_url  # acquired in previous step\n    },\n    timeout=5 * 60  # expires in 5 min\n)"
+      - label: Node.js
+        lang: javascript
+        source: "const uuid = require('uuid');\nconst axios = require('axios');\n\nconst correlationId = uuid.v4();\n\naxios.post(\n    'https://api.immersity.ai/api/v1/disparity',\n    {\n        correlationId,\n        inputImageUrl: ORIGINAL_IMAGE_URL, // this can be any image you want to get disparity for\n        resultPresignedUrl: putDisparityPresignedUrl, // acquired in previous step\n    },\n    {\n        headers: {\n            Authorization: 'Bearer {accessToken}', // acquired in previous step\n        },\n        timeout: 5 * 60 * 1000, // expires in 5 min\n    });\n    "
+      summary: Disparity Map
+      description: Historically, a disparity map is a visual representation of the differences in pixel coordinates between the corresponding points in a stereo image pair. It is typically generated from a pair of stereo images taken from slightly different viewpoints (left and right cameras). Using the power of the Immersity Cloud API, you can now generate a disparity map for any standard 2D image.
+      parameters: []
+      requestBody:
+        required: true
+        description: The input parameters for the disparity map estimation.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RESTMonoDepthEstimationParams'
+      responses:
+        '200':
+          description: The request has succeeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RESTAPICallResult'
+        '400':
+          description: The request has invalid parameters
+        '401':
+          description: Returned if the user is not authenticated or authentication parameters are invalid
+        '402':
+          description: Returned it there is not enough credit balance
+      tags:
+      - Media Transformation
+      security:
+      - bearer: []
+  /api/v1/animation:
+    post:
+      operationId: TransactionController_generateAnimation
+      x-codeSamples:
+      - label: Python
+        lang: Python
+        source: "import uuid\nimport requests\ncorrelation_id = str(uuid.uuid4())\nrequests.post(\n    'https://api.immersity.ai/api/v1/animation',\n    headers={\n        'Authorization': 'Bearer {access_token}'  # acquired in previous step\n    },\n    json={\n        'correlationId': correlation_id,\n        'inputDisparityUrl': disparity_presigned_url,  # acquired in previous step\n        'resultPresignedUrl': put_animation_presigned_url,  # acquired in previous step\n    },\n    timeout=5 * 60  # expires in 5 min\n)"
+      - label: Node.js
+        lang: javascript
+        source: "const uuid = require('uuid');\nconst axios = require('axios');\n\nconst correlationId = uuid.v4();\n\naxios.post(\n    'https://api.immersity.ai/api/v1/animation',\n    {\n        correlationId,\n        inputDisparityUrl: disparityPresignedUrl, // acquired in previous step\n        resultPresignedUrl: putAnimationPresignedUrl, // acquired in previous step\n    },\n    {\n        headers: {\n            Authorization: 'Bearer {accessToken}', // acquired in previous step\n        },\n        timeout: 5 * 60 * 1000, // expires in 5 min\n    });\n    "
+      summary: Animation
+      description: This API allows you to generate a captivating 3D animation. By utilizing the input disparity map and a single image, this generates an immersive 3D animation that adds depth and realism to the image.
+      parameters: []
+      requestBody:
+        required: true
+        description: The input parameters for the animation generation.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RESTAnimationGenerationParams'
+      responses:
+        '200':
+          description: The request has succeeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RESTAPICallResult'
+        '400':
+          description: The request has invalid parameters
+        '401':
+          description: Returned if the user is not authenticated or authentication parameters are invalid
+        '402':
+          description: Returned it there is not enough credit balance
+      tags:
+      - Media Transformation
+      security:
+      - bearer: []
+  /api/v1/transaction/callback:
+    post:
+      operationId: TransactionController_transactionCallback
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TransactionCallbackParams'
+      responses:
+        '201':
+          description: ''
+      tags:
+      - Media Transformation
+  /api/v1/sbs:
+    post:
+      operationId: TransactionController_generateStereoSbs
+      x-codeSamples:
+      - label: Python
+        lang: Python
+        source: "\nimport uuid\nimport requests\ncorrelation_id = str(uuid.uuid4())\nrequests.post(\n    'https://api.immersity.ai/api/v1/sbs', \n    headers={\n        'Authorization': 'Bearer {access_token}'  # acquired in previous step\n    },\n    json={\n        'correlationId': correlation_id,\n        'inputImageUrl': ORIGINAL_IMAGE_URL,  # this can be any image you want to get disparity for\n        'inputDisparityUrl': disparity_presigned_url,  # acquired in previous step\n        'resultPresignedUrl': put_sbs_presigned_url  # acquired in previous step\n    },\n    timeout=5 * 60  # expires in 5 min\n)"
+      - label: Node.js
+        lang: javascript
+        source: "const uuid = require('uuid');\nconst axios = require('axios');\n\nconst correlationId = uuid.v4();\n\naxios.post(\n    'https://api.immersity.ai/api/v1/sbs',\n    {\n        correlationId,\n        inputImageUrl: ORIGINAL_IMAGE_URL, // this can be any image you want to get disparity for\n        inputDisparityUrl: disparityPresignedUrl, // acquired in previous step\n        resultPresignedUrl: putSbsPresignedUrl, // acquired in previous step\n    },\n    {\n        headers: {\n            Authorization: 'Bearer {accessToken}', // acquired in previous step\n        },\n        timeout: 5 * 60 * 1000, // expires in 5 min\n    });\n    "
+      summary: Stereo SBS
+      description: ''
+      parameters: []
+      requestBody:
+        required: true
+        description: The input parameters for the SBS generation
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RESTStereoSbsGenerationParams'
+      responses:
+        '200':
+          description: The request has succeeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RESTAPICallResult'
+        '400':
+          description: The request has invalid parameters
+        '401':
+          description: Returned if the user is not authenticated or authentication parameters are invalid
+        '402':
+          description: Returned it there is not enough credit balance
+      tags:
+      - Media Transformation
+      security:
+      - bearer: []
+  /api/v1/topBottom:
+    post:
+      operationId: TransactionController_generateStereoTopBottom
+      x-codeSamples:
+      - label: Python
+        lang: Python
+        source: "\nimport uuid\nimport requests\ncorrelation_id = str(uuid.uuid4())\nrequests.post(\n    'https://api.immersity.ai/api/v1/topBottom', \n    headers={\n        'Authorization': 'Bearer {access_token}'  # acquired in previous step\n    },\n    json={\n        'correlationId': correlation_id,\n        'inputImageUrl': ORIGINAL_IMAGE_URL,  # this can be any image you want to get disparity for\n        'inputDisparityUrl': disparity_presigned_url,  # acquired in previous step\n        'resultPresignedUrl': put_sbs_presigned_url  # acquired in previous step\n    },\n    timeout=5 * 60  # expires in 5 min\n)"
+      - label: Node.js
+        lang: javascript
+        source: "const uuid = require('uuid');\nconst axios = require('axios');\n\nconst correlationId = uuid.v4();\n\naxios.post(\n    'https://api.immersity.ai/api/v1/topBottom',\n    {\n        correlationId,\n        inputImageUrl: ORIGINAL_IMAGE_URL, // this can be any image you want to get disparity for\n        inputDisparityUrl: disparityPresignedUrl, // acquired in previous step\n        resultPresignedUrl: putSbsPresignedUrl, // acquired in previous step\n    },\n    {\n        headers: {\n            Authorization: 'Bearer {accessToken}', // acquired in previous step\n        },\n        timeout: 5 * 60 * 1000, // expires in 5 min\n    });\n    "
+      summary: Stereo Top-Bottom
+      description: ''
+      parameters: []
+      requestBody:
+        required: true
+        description: The input parameters for the topBottom generation
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RESTStereoTopBottomGenerationParams'
+      responses:
+        '200':
+          description: The request has succeeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RESTAPICallResult'
+        '400':
+          description: The request has invalid parameters
+        '401':
+          description: Returned if the user is not authenticated or authentication parameters are invalid
+        '402':
+          description: Returned it there is not enough credit balance
+      tags:
+      - Media Transformation
+      security:
+      - bearer: []
+  /api/v1/decode:
+    post:
+      operationId: TransactionController_decodeLif
+      x-codeSamples:
+      - label: Python
+        lang: Python
+        source: "import uuid\nimport requests\ncorrelation_id = str(uuid.uuid4())\nrequests.post(\n    'https://api.immersity.ai/api/v1/decode', \n    headers={\n        'Authorization': 'Bearer {access_token}'  # acquired in previous step\n    },\n    json={\n        'correlationId': correlation_id,\n        'inputImageUrl': ORIGINAL_IMAGE_URL,  # this can be any image you want to get disparity for\n        'resultPresignedUrl': put_disparity_presigned_url  # acquired in previous step\n    },\n    timeout=5 * 60  # expires in 5 min\n)"
+      - label: Node.js
+        lang: javascript
+        source: "const uuid = require('uuid');\nconst axios = require('axios');\n\nconst correlationId = uuid.v4();\n\naxios.post(\n    'https://api.immersity.ai/api/v1/decode',\n    {\n        correlationId,\n        inputImageUrl: ORIGINAL_IMAGE_URL, // this can be any image you want to get disparity for\n        resultPresignedUrl: putDisparityPresignedUrl, // acquired in previous step\n    },\n    {\n        headers: {\n            Authorization: 'Bearer {accessToken}', // acquired in previous step\n        },\n        timeout: 5 * 60 * 1000, // expires in 5 min\n    });\n    "
+      summary: LIF Decoder
+      description: This API allows you to decode a LIF file into a 2D image.
+      parameters: []
+      requestBody:
+        required: true
+        description: The input parameters for the LIF decoder
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RESTLifDecoderParams'
+      responses:
+        '200':
+          description: The request has succeeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RESTAPICallResult'
+        '400':
+          description: The request has invalid parameters
+        '401':
+          description: Returned if the user is not authenticated or authentication parameters are invalid
+        '402':
+          description: Returned it there is not enough credit balance
+      tags:
+      - Media Transformation
+      security:
+      - bearer: []
+  /api/v1/encode:
+    post:
+      operationId: TransactionController_encodeLif
+      x-codeSamples:
+      - label: Python
+        lang: Python
+        source: "import uuid\nimport requests\ncorrelation_id = str(uuid.uuid4())\nrequests.post(\n    'https://api.immersity.ai/api/v1/encode', \n    headers={\n        'Authorization': 'Bearer {access_token}'  # acquired in previous step\n    },\n    json={\n        'correlationId': correlation_id,\n        'inputImageUrl': ORIGINAL_IMAGE_URL,  # this can be any image you want to get disparity for\n        'resultPresignedUrl': put_disparity_presigned_url  # acquired in previous step\n    },\n    timeout=5 * 60  # expires in 5 min\n)"
+      - label: Node.js
+        lang: javascript
+        source: "const uuid = require('uuid');\nconst axios = require('axios');\n\nconst correlationId = uuid.v4();\n\naxios.post(\n    'https://api.immersity.ai/api/v1/encode',\n    {\n        correlationId,\n        inputImageUrl: ORIGINAL_IMAGE_URL, // this can be any image you want to get disparity for\n        resultPresignedUrl: putDisparityPresignedUrl, // acquired in previous step\n    },\n    {\n        headers: {\n            Authorization: 'Bearer {accessToken}', // acquired in previous step\n        },\n        timeout: 5 * 60 * 1000, // expires in 5 min\n    });\n    "
+      summary: LIF Encoder
+      description: This API allows you to encode a 2D image into a LIF file.
+      parameters: []
+      requestBody:
+        required: true
+        description: The input parameters for the LIF encoder
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RESTLifEncoderParams'
+      responses:
+        '200':
+          description: The request has succeeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RESTAPICallResult'
+        '400':
+          description: The request has invalid parameters
+        '401':
+          description: Returned if the user is not authenticated or authentication parameters are invalid
+        '402':
+          description: Returned it there is not enough credit balance
+      tags:
+      - Media Transformation
+      security:
+      - bearer: []
+  /api/v1/video:
+    post:
+      operationId: TransactionController_generateVideoConversion
+      summary: 2D to 3D Video Conversion
+      description: This API allows you to convert a 2D video into 3D video. This service is an asynchronous only service, so despites it returns a 200 OK with resultPresignedUrl, the video will be available only after the conversion is done. The client must provide a custom callback URL to be notified when the conversion is done. Callback payload can include error code and error message.
+      parameters: []
+      requestBody:
+        required: true
+        description: The input parameters for the 2D to 3D Video Conversion.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RESTVideoConversionParams'
+      responses:
+        '200':
+          description: The request has succeeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RESTAPICallResult'
+        '400':
+          description: The request has invalid parameters
+        '401':
+          description: Returned if the user is not authenticated or authentication parameters are invalid
+      tags:
+      - Media Transformation
+      security:
+      - bearer: []
+  /api/v1/spatial:
+    post:
+      operationId: TransactionController_generateSpatialVideoConversion
+      summary: Convert video to Apple Vision Spatial
+      description: This API allows you to convert a video into Apple Vision Spatial video. This service is an asynchronous only service, so despites it returns a 200 OK with resultPresignedUrl, the video will be available only after the conversion is done. The client must provide a custom callback URL to be notified when the conversion is done. Callback payload can include error code and error message.
+      parameters: []
+      requestBody:
+        required: true
+        description: The input parameters for the animation generation.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RESTSpatialVideoConversionParams'
+      responses:
+        '200':
+          description: The request has succeeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RESTAPICallResult'
+        '400':
+          description: The request has invalid parameters
+        '401':
+          description: Returned if the user is not authenticated or authentication parameters are invalid
+      tags:
+      - Media Transformation
+      security:
+      - bearer: []
+components:
+  schemas:
+    RESTAPICallResult:
+      type: object
+      properties:
+        correlationId:
+          type: string
+          description: Unique query identifier
+          example: 123e4567-e89b-12d3-a456-426614174000
+        resultPresignedUrl:
+          type: string
+          description: Presigned url where processing result had been uploaded
+          example: https://s3.eu-central-1.amazonaws.com/3d-photo-api-dev-output/1.jpg
+      required:
+      - correlationId
+      - resultPresignedUrl
+    RESTVideoConversionParams:
+      type: object
+      properties:
+        inputVideoUrl:
+          type: string
+          description: Readable input video url
+          example: https://...
+        resultPresignedUrl:
+          type: string
+          description: Writable output video url
+          example: https://...
+        videoLength:
+          type: number
+          description: 'Video length in seconds. Used in price verification. Will be verified at our servers, and if does not match actual file, the request will be rejected in callbackUrl payload with error : ERROR_VIDEO_LENGTH_MISMATCH'
+          example: 10
+        creditAmount:
+          type: number
+          description: Expected amount of credits to be used for the conversion. Should be pre-calculated using our pricing model and match our calculations. Otherwise, request will be rejected.
+          example: 10
+        gain:
+          type: number
+          description: Floating point gain value
+          maximum: 10
+          minimum: -10
+          default: -1
+        convergence:
+          type: number
+          description: Floating point convergence value
+          maximum: 1
+          minimum: -1
+          default: 0
+        dilateRatio:
+          type: number
+          description: Integer value to dilate the disparity map
+          maximum: 20
+          minimum: 0
+          default: 3
+        outputType:
+          type: string
+          description: Output type
+          enum:
+          - sbs
+          - depth
+          - depth_exr
+          - tb
+          - spatial
+          - anaglyph
+          default: sbs
+        callbackUrl:
+          type: string
+          description: Callback URL the service will notify when the processing is done
+          example: https://...
+        correlationId:
+          type: string
+          description: UUID to correlate this request. This must be unique for each request. If not provided, the service will generate one
+          example: 4d4eb584-a5cd-453b-8b67-567c1df26cb1
+        outputWidth:
+          type: number
+          description: Expected single frame output width. For stereo videos, this value will be half of the total width. For top-bottom videos, this value will be the full width. For depth videos, this value will be the full width.
+          example: 1920
+          maximum: 8000
+        outputHeight:
+          type: number
+          description: Expected single frame output height. For stereo videos, this value will be the full height. For top-bottom videos, this value will be half of the total height. For depth videos, this value will be the full height.
+          example: 1080
+          maximum: 8000
+        autoConvergence:
+          type: boolean
+          description: Auto convergence
+          example: true
+        inputType:
+          type: string
+          description: Type of image input
+          enum:
+          - regular
+          - image360
+          default: regular
+        bitrate:
+          type: number
+          description: Bitrate for the output video
+          default: auto
+      required:
+      - inputVideoUrl
+      - resultPresignedUrl
+      - videoLength
+      - creditAmount
+      - callbackUrl
+      - outputWidth
+      - outputHeight
+    TransactionCallbackParams:
+      type: object
+      properties: {}
+    RESTLifEncoderParams:
+      type: object
+      properties:
+        resultPresignedUrl:
+          type: string
+          description: Readable output image url
+          example: https://...
+        inputSingleImageUrl:
+          type: string
+          description: Readable input image url
+          example: https://...
+        inputSingleDisparityUrl:
+          type: string
+          description: Readable input disparity url
+          example: https://...
+        inputLeftImageUrl:
+          type: string
+          description: Readable input image url
+          example: https://...
+        inputRightImageUrl:
+          type: string
+          description: Readable input image url
+          example: https://...
+        inputLeftDisparityUrl:
+          type: string
+          description: Readable input disparity url
+          example: https://...
+        inputRightDisparityUrl:
+          type: string
+          description: Readable input disparity url
+          example: https://...
+        inputDisparitySource:
+          type: string
+          description: Disparity source
+        gain:
+          type: number
+          description: Floating point gain value
+          maximum: 10
+          minimum: 0
+          default: Gain is estimated automatically based on input image for best results
+        convergence:
+          type: number
+          description: This changes the overall depth of the image to place objects in front of the screen or behind the screen or somewhere in between. It ranges from -1 to 1.
+          maximum: 1
+          minimum: -1
+          default: Convergence is estimated automatically based on input image for best results
+        correlationId:
+          type: string
+          description: UUID to correlate this request. This must be unique for each request. If not provided, the service will generate one
+          example: 4d4eb584-a5cd-453b-8b67-567c1df26cb4
+    RESTStereoTopBottomGenerationParams:
+      type: object
+      properties:
+        inputImageUrl:
+          type: string
+          description: Readable input image url
+          example: https://...
+        resultPresignedUrl:
+          type: string
+          description: Presigned URL where the service should write the results to. The URL MUST have 'PUT' permission so the service can write the result to. For more details about signed URLs, please refer to your respective cloud providers.
+          example: https://...
+        correlationId:
+          type: string
+          description: UUID to correlate this request. This must be unique for each request. If not provided, the service will generate one
+          example: 4d4eb584-a5cd-453b-8b67-567c1df26cb4
+        inputDisparityUrl:
+          type: string
+          description: Readable input disparity url
+          example: https://...
+        width:
+          type: number
+          description: Output image width
+          example: 600
+          default: Preserves original image width
+        height:
+          type: number
+          description: Output image height
+          example: 450
+          default: Preserves original image height
+        gain:
+          type: number
+          description: Floating point gain value
+          maximum: 10
+          minimum: 0
+          default: Gain is estimated automatically based on input image for best results
+        gainMultiplier:
+          type: number
+          description: A floating point number which is multiplied by gain
+          maximum: 10
+          minimum: 0
+        convergence:
+          type: number
+          description: This changes the overall depth of the image to place objects in front of the screen or behind the screen or somewhere in between. It ranges from -1 to 1.
+          maximum: 1
+          minimum: -1
+          default: Convergence is estimated automatically based on input image for best results
+      required:
+      - inputImageUrl
+      - inputDisparityUrl
+    RESTStereoSbsGenerationParams:
+      type: object
+      properties:
+        inputImageUrl:
+          type: string
+          description: Readable input image url
+          example: https://...
+        resultPresignedUrl:
+          type: string
+          description: Presigned URL where the service should write the results to. The URL MUST have 'PUT' permission so the service can write the result to. For more details about signed URLs, please refer to your respective cloud providers.
+          example: https://...
+        correlationId:
+          type: string
+          description: UUID to correlate this request. This must be unique for each request. If not provided, the service will generate one
+          example: 4d4eb584-a5cd-453b-8b67-567c1df26cb4
+        inputDisparityUrl:
+          type: string
+          description: Readable input disparity url
+          example: https://...
+        width:
+          type: number
+          description: Output image width
+          example: 600
+          default: Preserves original image width
+        height:
+          type: number
+          description: Output image height
+          example: 450
+          default: Preserves original image height
+        gain:
+          type: number
+          description: Floating point gain value
+          maximum: 10
+          minimum: 0
+          default: Gain is estimated automatically based on input image for best results
+        gainMultiplier:
+          type: number
+          description: A floating point number which is multiplied by gain
+          maximum: 10
+          minimum: 0
+        convergence:
+          type: number
+          description: This changes the overall depth of the image to place objects in front of the screen or behind the screen or somewhere in between. It ranges from -1 to 1.
+          maximum: 1
+          minimum: -1
+          default: Convergence is estimated automatically based on input image for best results
+        outputType:
+          type: string
+          description: Output type. Default is SBS
+          enum:
+          - sbs
+          - anaglyph
+          - spatial
+          default: sbs
+      required:
+      - inputImageUrl
+    RESTAnimationGenerationParams:
+      type: object
+      properties:
+        inputImageUrl:
+          type: string
+          description: Readable input image url
+          example: https://...
+        resultPresignedUrl:
+          type: string
+          description: Presigned URL where the service should write the results to. The URL MUST have 'PUT' permission so the service can write the result to. For more details about signed URLs, please refer to your respective cloud providers.
+          example: https://...
+        correlationId:
+          type: string
+          description: UUID to correlate this request. This must be unique for each request. If not provided, the service will generate one
+          example: 4d4eb584-a5cd-453b-8b67-567c1df26cb4
+        inputDisparityUrl:
+          type: string
+          description: Readable input disparity url
+          example: https://...
+        animationType:
+          type: string
+          description: Type of animation
+          enum:
+          - mp4
+          - gif
+          default: mp4
+        pattern:
+          type: string
+          description: Pattern for the animation. This controls the position from which the 3D scene is viewed for each frame of the resulting video. Specify a comma-separated list of floats. The order of these values is as follows {x1,y1,z1,x2,y2,z2…xn,yn,zn} where x1,y1,z1 are the x, y, z coordinates in 3D space for the first frame, x2,y2,z2 for the next frame and so forth. Add as many coordinate triplets as there are frames in the video that you want to create. Animation length is ignored when using this parameter since length is determined by the number of frames that are placed. Also the amplitude and phase parameters are ignored since here you explicitly set the position rather than having it calculated
+          example: '{0.0, 0.0, 0.0, 0.0, 0.0, 0.0}'
+        animationLength:
+          type: number
+          description: Duration of the animation. This controls how fast or slow the animation should be. For example, a value of 1 would create the fastest and 10 would create the slowest animations.
+          maximum: 10
+          minimum: 1
+          default: 4
+        outputWidth:
+          type: number
+          description: Output image width
+          example: 600
+          default: Equals to input width
+        outputHeight:
+          type: number
+          description: Output image height
+          example: 450
+          default: Equals to input height
+        amplitudeX:
+          type: number
+          description: Amount of motion in X axis.
+          maximum: 10
+          minimum: 0
+          default: 1
+        amplitudeY:
+          type: number
+          description: Amount of motion in Y axis.
+          maximum: 10
+          minimum: 0
+          default: 1
+        amplitudeZ:
+          type: number
+          description: Amount of motion in Z axis.
+          maximum: 10
+          minimum: 0
+          default: 1
+        phaseX:
+          type: number
+          description: The starting point or offset of the motion in the x-axis. For example, a phase value of 0 indicates that the motion starts from the origin.
+          maximum: 7
+          minimum: 0
+          default: 0
+        phaseY:
+          type: number
+          description: The starting point or offset of the motion in the Y-axis. For example, a phase value of 0 indicates that the motion starts from the origin.
+          maximum: 7
+          minimum: 0
+          default: 0.25
+        phaseZ:
+          type: number
+          description: The starting point or offset of the motion in the Z-axis. For example, a phase value of 0 indicates that the motion starts from the origin.
+          maximum: 7
+          minimum: 0
+          default: 0.25
+        gain:
+          type: number
+          description: Floating point gain value
+          maximum: 10
+          minimum: 0
+          default: Gain is estimated automatically based on input image for best results
+        convergence:
+          type: number
+          description: This sets the pivot point of the animation. At this depth nothing moves and everything else moves around this point.
+          maximum: 1
+          minimum: -1
+          default: Convergence is estimated automatically based on input image for best results
+        numberOfLoops:
+          type: number
+          description: Number of times the animation should loop. If not provided, the animation will not loop.
+          maximum: 10
+          minimum: 0
+          default: 0
+        outputFps:
+          type: number
+          description: 'FPS for the output video. Possible values are : 1,5,10,15,24,25,30,60'
+          default: auto
+      required:
+      - inputImageUrl
+      - inputDisparityUrl
+    RESTSpatialVideoConversionParams:
+      type: object
+      properties:
+        inputVideoUrl:
+          type: string
+          description: Readable input video url
+          example: https://...
+        resultPresignedUrl:
+          type: string
+          description: Writable output video url
+          example: https://...
+        videoLength:
+          type: number
+          description: 'Video length in seconds. Used in price verification. Will be verified at our servers, and if does not match actual file, the request will be rejected in callbackUrl payload with error : ERROR_VIDEO_LENGTH_MISMATCH'
+          example: 10
+        creditAmount:
+          type: number
+          description: Expected amount of credits to be used for the conversion. Should be pre-calculated using our pricing model and match our calculations. Otherwise, request will be rejected.
+          example: 10
+        correlationId:
+          type: string
+          description: UUID to correlate this request. This must be unique for each request. If not provided, the service will generate one
+          example: 4d4eb584-a5cd-453b-8b67-567c1df26cb4
+        callbackUrl:
+          type: string
+          description: Callback URL the service will notify when the processing is done
+          example: https://...
+        inputType:
+          type: string
+          description: Input type
+          enum:
+          - sbs
+          - tb
+          default: sbs
+      required:
+      - inputVideoUrl
+      - resultPresignedUrl
+      - videoLength
+      - creditAmount
+      - callbackUrl
+      - inputType
+    RESTMonoDepthEstimationParams:
+      type: object
+      properties:
+        inputImageUrl:
+          type: string
+          description: Readable input image url
+          example: https://...
+        resultPresignedUrl:
+          type: string
+          description: Presigned URL where the service should write the results to. The URL MUST have 'PUT' permission so the service can write the result to. For more details about signed URLs, please refer to your respective cloud providers.
+          example: https://...
+        correlationId:
+          type: string
+          description: UUID to correlate this request. This must be unique for each request. If not provided, the service will generate one
+          example: 4d4eb584-a5cd-453b-8b67-567c1df26cb4
+        dilation:
+          type: number
+          description: Edge dilation has the effect of widening objects to avoid stretching artifacts. If there is no dilation then colors from the foreground may bleed along the edge towards the background and vice versa. To have a cleaner edge we can include some of the background color in the foreground object by widening the object. This operation is performed directly on the disparity map before rendering the output.
+          maximum: 0.01
+          minimum: -0.01
+          default: 0.0063
+        inputType:
+          type: string
+          description: There are two types of input. Standard 2D images and 360 degree images. 360 degree images are processed differently due to the fisheye nature and the need to have these join seamlessly on the left and right edge
+          enum:
+          - image2d
+          - image360
+          default: image2d
+        outputBitDepth:
+          type: string
+          description: The disparity map can be created in either 8-bit bit depth or 16-bit depth. 8-bit results in a smaller file size whilst 16-bit results in a disparity map with greater depth definition
+          enum:
+          - uint8
+          - uint16
+          default: uint8
+      required:
+      - inputImageUrl
+    RESTLifDecoderParams:
+      type: object
+      properties:
+        inputImageUrl:
+          type: string
+          description: Readable input image url
+          example: https://...
+        resultPresignedUrl:
+          type: string
+          description: Presigned URL where the service should write the results to. The URL MUST have 'PUT' permission so the service can write the result to. For more details about signed URLs, please refer to your respective cloud providers.
+          example: https://...
+        correlationId:
+          type: string
+          description: UUID to correlate this request. This must be unique for each request. If not provided, the service will generate one
+          example: 4d4eb584-a5cd-453b-8b67-567c1df26cb4
+      required:
+      - inputImageUrl
+  securitySchemes:
+    bearer:
+      scheme: bearer
+      bearerFormat: JWT
+      type: http
+externalDocs:
+  description: Find out more about Immersity Cloud
+  url: https://docs-api.immersity.ai/docs/getting-started
+x-readme:
+  explorer-enabled: true
+  proxy-enabled: true
