@@ -23,6 +23,21 @@ deliveryModel:
   - pricing
   generated: '2026-08-28'
   method: derived
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  - scopes
+  - security
+  generated: '2026-09-02'
+  method: derived
 image: https://cdn.prod.website-files.com/684b15b38863077bd3c46420/6895344cc46838641181605c_OpenGraph_V1.png
 url: https://raw.githubusercontent.com/api-evangelist/leia/refs/heads/main/apis.yml
 x-type: company
@@ -256,8 +271,9 @@ common:
   url: data-model/leia-data-model.yml
 - type: Webhooks
   url: asyncapi/leia-callbacks.yml
-- type: MCPServer
+- type: X-MCPServerCandidate
   url: mcp/leia-mcp.yml
+  note: 'Renamed from MCPServer 2026-09-03 (roadmap#247): the manifest self-describes as status: candidate — a tool list derived from the published API contracts, not an existing server. The scorer already read the manifest and reported mcp_server correctly; the MCPServer type was crediting the artifact-type surfaces with a server that does not exist.'
 - type: AgentSkill
   url: skills/_index.yml
 - type: Plans
