@@ -1,0 +1,34 @@
+{
+  "provider": "leia",
+  "sources": [
+    "_original/leia-immersity-authentication-openapi.json",
+    "_original/leia-immersity-cloud-api-openapi.json"
+  ],
+  "outputs": [
+    "leia-protocol-api-openapi.yml",
+    "leia-media-transformation-api-openapi.yml",
+    "leia-product-pricing-api-openapi.yml",
+    "leia-storage-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [
+    "2 archived document(s) dropped as subsets of other archived documents",
+    "sourced from openapi/_original/ (2 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "leia-immersity-authentication-openapi.json: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "leia-immersity-authentication-openapi.json: tagged paths POST /protocol/openid-connect/token -> Protocol",
+    "leia-immersity-authentication-openapi.json: declared missing tag: Protocol",
+    "leia-immersity-cloud-api-openapi.json: upgraded openapi 3.0.0 -> OpenAPI 3.2.0",
+    "leia-immersity-cloud-api-openapi.json: declared missing tag: Product Pricing",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "_original/leia-immersity-cloud-api-openapi.yml: archived document superseded by a larger archived document",
+    "_original/leia-immersity-authentication-openapi.yml: archived document superseded by a larger archived document",
+    "leia-media-transformation-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "leia-product-pricing-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "leia-protocol-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "leia-storage-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
+}
