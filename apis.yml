@@ -48,7 +48,7 @@ modified: '2026-08-01'
 tags:
 - 3D
 - Spatial Computing
-- Computer-Vision
+- Computer Vision
 - depth-estimation
 - Image Processing
 - Video Processing
@@ -67,6 +67,7 @@ tags_raw:
 - displays
 - media-transformation
 - immersive-experiences
+- Computer-Vision
 apis:
 - aid: leia:leia-media-transformation-api
   name: Leia Media Transformation API
