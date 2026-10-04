@@ -312,303 +312,6 @@ paths:
       - bearer: []
 components:
   schemas:
-    RESTAPICallResult:
-      type: object
-      properties:
-        correlationId:
-          type: string
-          description: Unique query identifier
-          example: 123e4567-e89b-12d3-a456-426614174000
-        resultPresignedUrl:
-          type: string
-          description: Presigned url where processing result had been uploaded
-          example: https://s3.eu-central-1.amazonaws.com/3d-photo-api-dev-output/1.jpg
-      required:
-      - correlationId
-      - resultPresignedUrl
-    RESTSpatialVideoConversionParams:
-      type: object
-      properties:
-        inputVideoUrl:
-          type: string
-          description: Readable input video url
-          example: https://...
-        resultPresignedUrl:
-          type: string
-          description: Writable output video url
-          example: https://...
-        videoLength:
-          type: number
-          description: 'Video length in seconds. Used in price verification. Will be verified at our servers, and if does not match actual file, the request will be rejected in callbackUrl payload with error : ERROR_VIDEO_LENGTH_MISMATCH'
-          example: 10
-        creditAmount:
-          type: number
-          description: Expected amount of credits to be used for the conversion. Should be pre-calculated using our pricing model and match our calculations. Otherwise, request will be rejected.
-          example: 10
-        correlationId:
-          type: string
-          description: UUID to correlate this request. This must be unique for each request. If not provided, the service will generate one
-          example: 4d4eb584-a5cd-453b-8b67-567c1df26cb4
-        callbackUrl:
-          type: string
-          description: Callback URL the service will notify when the processing is done
-          example: https://...
-        inputType:
-          type: string
-          description: Input type
-          enum:
-          - sbs
-          - tb
-          default: sbs
-      required:
-      - inputVideoUrl
-      - resultPresignedUrl
-      - videoLength
-      - creditAmount
-      - callbackUrl
-      - inputType
-    RESTStereoTopBottomGenerationParams:
-      type: object
-      properties:
-        inputImageUrl:
-          type: string
-          description: Readable input image url
-          example: https://...
-        resultPresignedUrl:
-          type: string
-          description: Presigned URL where the service should write the results to. The URL MUST have 'PUT' permission so the service can write the result to. For more details about signed URLs, please refer to your respective cloud providers.
-          example: https://...
-        correlationId:
-          type: string
-          description: UUID to correlate this request. This must be unique for each request. If not provided, the service will generate one
-          example: 4d4eb584-a5cd-453b-8b67-567c1df26cb4
-        inputDisparityUrl:
-          type: string
-          description: Readable input disparity url
-          example: https://...
-        width:
-          type: number
-          description: Output image width
-          example: 600
-          default: Preserves original image width
-        height:
-          type: number
-          description: Output image height
-          example: 450
-          default: Preserves original image height
-        gain:
-          type: number
-          description: Floating point gain value
-          maximum: 10
-          minimum: 0
-          default: Gain is estimated automatically based on input image for best results
-        gainMultiplier:
-          type: number
-          description: A floating point number which is multiplied by gain
-          maximum: 10
-          minimum: 0
-        convergence:
-          type: number
-          description: This changes the overall depth of the image to place objects in front of the screen or behind the screen or somewhere in between. It ranges from -1 to 1.
-          maximum: 1
-          minimum: -1
-          default: Convergence is estimated automatically based on input image for best results
-      required:
-      - inputImageUrl
-      - inputDisparityUrl
-    RESTVideoConversionParams:
-      type: object
-      properties:
-        inputVideoUrl:
-          type: string
-          description: Readable input video url
-          example: https://...
-        resultPresignedUrl:
-          type: string
-          description: Writable output video url
-          example: https://...
-        videoLength:
-          type: number
-          description: 'Video length in seconds. Used in price verification. Will be verified at our servers, and if does not match actual file, the request will be rejected in callbackUrl payload with error : ERROR_VIDEO_LENGTH_MISMATCH'
-          example: 10
-        creditAmount:
-          type: number
-          description: Expected amount of credits to be used for the conversion. Should be pre-calculated using our pricing model and match our calculations. Otherwise, request will be rejected.
-          example: 10
-        gain:
-          type: number
-          description: Floating point gain value
-          maximum: 10
-          minimum: -10
-          default: -1
-        convergence:
-          type: number
-          description: Floating point convergence value
-          maximum: 1
-          minimum: -1
-          default: 0
-        dilateRatio:
-          type: number
-          description: Integer value to dilate the disparity map
-          maximum: 20
-          minimum: 0
-          default: 3
-        outputType:
-          type: string
-          description: Output type
-          enum:
-          - sbs
-          - depth
-          - depth_exr
-          - tb
-          - spatial
-          - anaglyph
-          default: sbs
-        callbackUrl:
-          type: string
-          description: Callback URL the service will notify when the processing is done
-          example: https://...
-        correlationId:
-          type: string
-          description: UUID to correlate this request. This must be unique for each request. If not provided, the service will generate one
-          example: 4d4eb584-a5cd-453b-8b67-567c1df26cb1
-        outputWidth:
-          type: number
-          description: Expected single frame output width. For stereo videos, this value will be half of the total width. For top-bottom videos, this value will be the full width. For depth videos, this value will be the full width.
-          example: 1920
-          maximum: 8000
-        outputHeight:
-          type: number
-          description: Expected single frame output height. For stereo videos, this value will be the full height. For top-bottom videos, this value will be half of the total height. For depth videos, this value will be the full height.
-          example: 1080
-          maximum: 8000
-        autoConvergence:
-          type: boolean
-          description: Auto convergence
-          example: true
-        inputType:
-          type: string
-          description: Type of image input
-          enum:
-          - regular
-          - image360
-          default: regular
-        bitrate:
-          type: number
-          description: Bitrate for the output video
-          default: auto
-      required:
-      - inputVideoUrl
-      - resultPresignedUrl
-      - videoLength
-      - creditAmount
-      - callbackUrl
-      - outputWidth
-      - outputHeight
-    RESTLifEncoderParams:
-      type: object
-      properties:
-        resultPresignedUrl:
-          type: string
-          description: Readable output image url
-          example: https://...
-        inputSingleImageUrl:
-          type: string
-          description: Readable input image url
-          example: https://...
-        inputSingleDisparityUrl:
-          type: string
-          description: Readable input disparity url
-          example: https://...
-        inputLeftImageUrl:
-          type: string
-          description: Readable input image url
-          example: https://...
-        inputRightImageUrl:
-          type: string
-          description: Readable input image url
-          example: https://...
-        inputLeftDisparityUrl:
-          type: string
-          description: Readable input disparity url
-          example: https://...
-        inputRightDisparityUrl:
-          type: string
-          description: Readable input disparity url
-          example: https://...
-        inputDisparitySource:
-          type: string
-          description: Disparity source
-        gain:
-          type: number
-          description: Floating point gain value
-          maximum: 10
-          minimum: 0
-          default: Gain is estimated automatically based on input image for best results
-        convergence:
-          type: number
-          description: This changes the overall depth of the image to place objects in front of the screen or behind the screen or somewhere in between. It ranges from -1 to 1.
-          maximum: 1
-          minimum: -1
-          default: Convergence is estimated automatically based on input image for best results
-        correlationId:
-          type: string
-          description: UUID to correlate this request. This must be unique for each request. If not provided, the service will generate one
-          example: 4d4eb584-a5cd-453b-8b67-567c1df26cb4
-    RESTMonoDepthEstimationParams:
-      type: object
-      properties:
-        inputImageUrl:
-          type: string
-          description: Readable input image url
-          example: https://...
-        resultPresignedUrl:
-          type: string
-          description: Presigned URL where the service should write the results to. The URL MUST have 'PUT' permission so the service can write the result to. For more details about signed URLs, please refer to your respective cloud providers.
-          example: https://...
-        correlationId:
-          type: string
-          description: UUID to correlate this request. This must be unique for each request. If not provided, the service will generate one
-          example: 4d4eb584-a5cd-453b-8b67-567c1df26cb4
-        dilation:
-          type: number
-          description: Edge dilation has the effect of widening objects to avoid stretching artifacts. If there is no dilation then colors from the foreground may bleed along the edge towards the background and vice versa. To have a cleaner edge we can include some of the background color in the foreground object by widening the object. This operation is performed directly on the disparity map before rendering the output.
-          maximum: 0.01
-          minimum: -0.01
-          default: 0.0063
-        inputType:
-          type: string
-          description: There are two types of input. Standard 2D images and 360 degree images. 360 degree images are processed differently due to the fisheye nature and the need to have these join seamlessly on the left and right edge
-          enum:
-          - image2d
-          - image360
-          default: image2d
-        outputBitDepth:
-          type: string
-          description: The disparity map can be created in either 8-bit bit depth or 16-bit depth. 8-bit results in a smaller file size whilst 16-bit results in a disparity map with greater depth definition
-          enum:
-          - uint8
-          - uint16
-          default: uint8
-      required:
-      - inputImageUrl
-    RESTLifDecoderParams:
-      type: object
-      properties:
-        inputImageUrl:
-          type: string
-          description: Readable input image url
-          example: https://...
-        resultPresignedUrl:
-          type: string
-          description: Presigned URL where the service should write the results to. The URL MUST have 'PUT' permission so the service can write the result to. For more details about signed URLs, please refer to your respective cloud providers.
-          example: https://...
-        correlationId:
-          type: string
-          description: UUID to correlate this request. This must be unique for each request. If not provided, the service will generate one
-          example: 4d4eb584-a5cd-453b-8b67-567c1df26cb4
-      required:
-      - inputImageUrl
     TransactionCallbackParams:
       type: object
       properties: {}
@@ -719,6 +422,158 @@ components:
       required:
       - inputImageUrl
       - inputDisparityUrl
+    RESTVideoConversionParams:
+      type: object
+      properties:
+        inputVideoUrl:
+          type: string
+          description: Readable input video url
+          example: https://...
+        resultPresignedUrl:
+          type: string
+          description: Writable output video url
+          example: https://...
+        videoLength:
+          type: number
+          description: 'Video length in seconds. Used in price verification. Will be verified at our servers, and if does not match actual file, the request will be rejected in callbackUrl payload with error : ERROR_VIDEO_LENGTH_MISMATCH'
+          example: 10
+        creditAmount:
+          type: number
+          description: Expected amount of credits to be used for the conversion. Should be pre-calculated using our pricing model and match our calculations. Otherwise, request will be rejected.
+          example: 10
+        gain:
+          type: number
+          description: Floating point gain value
+          maximum: 10
+          minimum: -10
+          default: -1
+        convergence:
+          type: number
+          description: Floating point convergence value
+          maximum: 1
+          minimum: -1
+          default: 0
+        dilateRatio:
+          type: number
+          description: Integer value to dilate the disparity map
+          maximum: 20
+          minimum: 0
+          default: 3
+        outputType:
+          type: string
+          description: Output type
+          enum:
+          - sbs
+          - depth
+          - depth_exr
+          - tb
+          - spatial
+          - anaglyph
+          default: sbs
+        callbackUrl:
+          type: string
+          description: Callback URL the service will notify when the processing is done
+          example: https://...
+        correlationId:
+          type: string
+          description: UUID to correlate this request. This must be unique for each request. If not provided, the service will generate one
+          example: 4d4eb584-a5cd-453b-8b67-567c1df26cb1
+        outputWidth:
+          type: number
+          description: Expected single frame output width. For stereo videos, this value will be half of the total width. For top-bottom videos, this value will be the full width. For depth videos, this value will be the full width.
+          example: 1920
+          maximum: 8000
+        outputHeight:
+          type: number
+          description: Expected single frame output height. For stereo videos, this value will be the full height. For top-bottom videos, this value will be half of the total height. For depth videos, this value will be the full height.
+          example: 1080
+          maximum: 8000
+        autoConvergence:
+          type: boolean
+          description: Auto convergence
+          example: true
+        inputType:
+          type: string
+          description: Type of image input
+          enum:
+          - regular
+          - image360
+          default: regular
+        bitrate:
+          type: number
+          description: Bitrate for the output video
+          default: auto
+      required:
+      - inputVideoUrl
+      - resultPresignedUrl
+      - videoLength
+      - creditAmount
+      - callbackUrl
+      - outputWidth
+      - outputHeight
+    RESTAPICallResult:
+      type: object
+      properties:
+        correlationId:
+          type: string
+          description: Unique query identifier
+          example: 123e4567-e89b-12d3-a456-426614174000
+        resultPresignedUrl:
+          type: string
+          description: Presigned url where processing result had been uploaded
+          example: https://s3.eu-central-1.amazonaws.com/3d-photo-api-dev-output/1.jpg
+      required:
+      - correlationId
+      - resultPresignedUrl
+    RESTStereoTopBottomGenerationParams:
+      type: object
+      properties:
+        inputImageUrl:
+          type: string
+          description: Readable input image url
+          example: https://...
+        resultPresignedUrl:
+          type: string
+          description: Presigned URL where the service should write the results to. The URL MUST have 'PUT' permission so the service can write the result to. For more details about signed URLs, please refer to your respective cloud providers.
+          example: https://...
+        correlationId:
+          type: string
+          description: UUID to correlate this request. This must be unique for each request. If not provided, the service will generate one
+          example: 4d4eb584-a5cd-453b-8b67-567c1df26cb4
+        inputDisparityUrl:
+          type: string
+          description: Readable input disparity url
+          example: https://...
+        width:
+          type: number
+          description: Output image width
+          example: 600
+          default: Preserves original image width
+        height:
+          type: number
+          description: Output image height
+          example: 450
+          default: Preserves original image height
+        gain:
+          type: number
+          description: Floating point gain value
+          maximum: 10
+          minimum: 0
+          default: Gain is estimated automatically based on input image for best results
+        gainMultiplier:
+          type: number
+          description: A floating point number which is multiplied by gain
+          maximum: 10
+          minimum: 0
+        convergence:
+          type: number
+          description: This changes the overall depth of the image to place objects in front of the screen or behind the screen or somewhere in between. It ranges from -1 to 1.
+          maximum: 1
+          minimum: -1
+          default: Convergence is estimated automatically based on input image for best results
+      required:
+      - inputImageUrl
+      - inputDisparityUrl
     RESTStereoSbsGenerationParams:
       type: object
       properties:
@@ -773,6 +628,151 @@ components:
           - anaglyph
           - spatial
           default: sbs
+      required:
+      - inputImageUrl
+    RESTLifEncoderParams:
+      type: object
+      properties:
+        resultPresignedUrl:
+          type: string
+          description: Readable output image url
+          example: https://...
+        inputSingleImageUrl:
+          type: string
+          description: Readable input image url
+          example: https://...
+        inputSingleDisparityUrl:
+          type: string
+          description: Readable input disparity url
+          example: https://...
+        inputLeftImageUrl:
+          type: string
+          description: Readable input image url
+          example: https://...
+        inputRightImageUrl:
+          type: string
+          description: Readable input image url
+          example: https://...
+        inputLeftDisparityUrl:
+          type: string
+          description: Readable input disparity url
+          example: https://...
+        inputRightDisparityUrl:
+          type: string
+          description: Readable input disparity url
+          example: https://...
+        inputDisparitySource:
+          type: string
+          description: Disparity source
+        gain:
+          type: number
+          description: Floating point gain value
+          maximum: 10
+          minimum: 0
+          default: Gain is estimated automatically based on input image for best results
+        convergence:
+          type: number
+          description: This changes the overall depth of the image to place objects in front of the screen or behind the screen or somewhere in between. It ranges from -1 to 1.
+          maximum: 1
+          minimum: -1
+          default: Convergence is estimated automatically based on input image for best results
+        correlationId:
+          type: string
+          description: UUID to correlate this request. This must be unique for each request. If not provided, the service will generate one
+          example: 4d4eb584-a5cd-453b-8b67-567c1df26cb4
+    RESTMonoDepthEstimationParams:
+      type: object
+      properties:
+        inputImageUrl:
+          type: string
+          description: Readable input image url
+          example: https://...
+        resultPresignedUrl:
+          type: string
+          description: Presigned URL where the service should write the results to. The URL MUST have 'PUT' permission so the service can write the result to. For more details about signed URLs, please refer to your respective cloud providers.
+          example: https://...
+        correlationId:
+          type: string
+          description: UUID to correlate this request. This must be unique for each request. If not provided, the service will generate one
+          example: 4d4eb584-a5cd-453b-8b67-567c1df26cb4
+        dilation:
+          type: number
+          description: Edge dilation has the effect of widening objects to avoid stretching artifacts. If there is no dilation then colors from the foreground may bleed along the edge towards the background and vice versa. To have a cleaner edge we can include some of the background color in the foreground object by widening the object. This operation is performed directly on the disparity map before rendering the output.
+          maximum: 0.01
+          minimum: -0.01
+          default: 0.0063
+        inputType:
+          type: string
+          description: There are two types of input. Standard 2D images and 360 degree images. 360 degree images are processed differently due to the fisheye nature and the need to have these join seamlessly on the left and right edge
+          enum:
+          - image2d
+          - image360
+          default: image2d
+        outputBitDepth:
+          type: string
+          description: The disparity map can be created in either 8-bit bit depth or 16-bit depth. 8-bit results in a smaller file size whilst 16-bit results in a disparity map with greater depth definition
+          enum:
+          - uint8
+          - uint16
+          default: uint8
+      required:
+      - inputImageUrl
+    RESTSpatialVideoConversionParams:
+      type: object
+      properties:
+        inputVideoUrl:
+          type: string
+          description: Readable input video url
+          example: https://...
+        resultPresignedUrl:
+          type: string
+          description: Writable output video url
+          example: https://...
+        videoLength:
+          type: number
+          description: 'Video length in seconds. Used in price verification. Will be verified at our servers, and if does not match actual file, the request will be rejected in callbackUrl payload with error : ERROR_VIDEO_LENGTH_MISMATCH'
+          example: 10
+        creditAmount:
+          type: number
+          description: Expected amount of credits to be used for the conversion. Should be pre-calculated using our pricing model and match our calculations. Otherwise, request will be rejected.
+          example: 10
+        correlationId:
+          type: string
+          description: UUID to correlate this request. This must be unique for each request. If not provided, the service will generate one
+          example: 4d4eb584-a5cd-453b-8b67-567c1df26cb4
+        callbackUrl:
+          type: string
+          description: Callback URL the service will notify when the processing is done
+          example: https://...
+        inputType:
+          type: string
+          description: Input type
+          enum:
+          - sbs
+          - tb
+          default: sbs
+      required:
+      - inputVideoUrl
+      - resultPresignedUrl
+      - videoLength
+      - creditAmount
+      - callbackUrl
+      - inputType
+    RESTLifDecoderParams:
+      type: object
+      properties:
+        inputImageUrl:
+          type: string
+          description: Readable input image url
+          example: https://...
+        resultPresignedUrl:
+          type: string
+          description: Presigned URL where the service should write the results to. The URL MUST have 'PUT' permission so the service can write the result to. For more details about signed URLs, please refer to your respective cloud providers.
+          example: https://...
+        correlationId:
+          type: string
+          description: UUID to correlate this request. This must be unique for each request. If not provided, the service will generate one
+          example: 4d4eb584-a5cd-453b-8b67-567c1df26cb4
       required:
       - inputImageUrl
   securitySchemes:
