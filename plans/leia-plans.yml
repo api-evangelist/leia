@@ -67,3 +67,47 @@ x-evidence:
   fetched: '2026-08-01'
   url: https://immersity.ai/pricing
   http_status: 200
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - free
+  - subscription
+  units: []
+  plans:
+  - name: Free
+    access: other
+    model: free
+    model_how: derived
+    units: []
+    periods: []
+  - name: Image
+    access: other
+    model: subscription
+    model_how: derived
+    units: []
+    periods: []
+  - name: Image Pro
+    access: other
+    model: subscription
+    model_how: derived
+    units: []
+    periods: []
+  - name: Video
+    access: other
+    model: subscription
+    model_how: derived
+    units: []
+    periods: []
+  - name: Video Pro
+    access: other
+    model: subscription
+    model_how: derived
+    units: []
+    periods: []
+  - name: Video Max
+    access: other
+    model: subscription
+    model_how: derived
+    units: []
+    periods: []
