@@ -64,37 +64,142 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Leia Inc. is the Silicon Valley company behind **Immersity**, a platform for immersive 3D experiences on
-everyday devices. Spun out of HP Labs in 2014 by physicist David Fattal, Leia pairs a Switchable-Display
-hardware stack (nano-optics, a liquid-crystal switchable layer and per-pixel panel calibration, shipped in
-Lume Pad, Acer SpatialLabs, Samsung Odyssey 3D, ASUS, Nubia and zSpace devices) with Spatial AI software
-that converts flat 2D photos and video into stereo, top-bottom, LIF and Apple Vision spatial output.
-Formerly known as LeiaPix; acquired Dimenco and the Philips 3D patent portfolio in 2023.
+Leia Inc. is the Silicon Valley company behind Immersity, a platform for immersive 3D experiences on everyday devices. Spun out of HP Labs in 2014 by physicist David Fattal, Leia pairs a Switchable-Display hardware stack (nano-optics, liquid-crystal switchable layer, per-pixel panel calibration, shipped in Lume Pad, Acer SpatialLabs, Samsung Odyssey 3D, ASUS, Nubia and zSpace devices) with Spatial AI software that converts flat 2D photos and video into stereo, top-bottom, LIF and Apple Vision spatial output in real time. Developers reach that Spatial AI through the Immersity Cloud API — a credit-metered REST API at api.immersity.ai with OAuth 2.0 client-credentials auth via a Keycloak realm, covering disparity-map estimation, animation generation, stereo SBS and top-bottom rendering, LIF encode/decode, 2D-to-3D video conversion and presigned Leia Storage uploads. Formerly known as LeiaPix; the company acquired Dimenco and the Philips 3D patent portfolio in 2023 and holds 2,000+ patents.
 
-- Website: https://immersity.ai/
-- Developers: https://immersity.ai/developers
-- API docs: https://docs-api.immersity.ai/docs/getting-started
-- GitHub: https://github.com/LeiaInc
+**Areas:** 3D · Spatial Computing · Computer Vision · depth-estimation · Image Processing · Video Processing · Generative AI · Displays · Media Transformation · Immersive Experiences
 
-## APIs
+## Leia on APIs.io
 
-| API | Base URL | Contract |
-|---|---|---|
-| Immersity Cloud API | `https://api.immersity.ai` | `openapi/leia-immersity-cloud-api-openapi.yml` (OpenAPI 3.0.0, 11 operations) |
-| Immersity AI Authentication API | `https://auth.immersity.ai/auth/realms/immersity` | `openapi/leia-immersity-authentication-openapi.yml` |
+Everything profiled for Leia is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/leia/](https://apis.io/providers/leia/)** — or go straight to one of the APIs or properties below.
 
-The Immersity Cloud API is a credit-metered media-transformation surface: disparity (depth) estimation,
-3D animation generation, stereo SBS / top-bottom rendering, LIF encode/decode, 2D-to-3D and Apple Vision
-spatial video conversion, and presigned Leia Storage uploads. Auth is OAuth 2.0 client credentials against
-an Immersity Keycloak realm.
+### APIs (4)
 
-## Artifacts
+- [Leia Media Transformation API](https://apis.io/apis/leia/leia-media-transformation-api/) — The Media Transformation API from Leia — 9 operation(s) for media transformation.
+- [Leia Product Pricing API](https://apis.io/apis/leia/leia-product-pricing-api/) — The Product Pricing API from Leia — 1 operation(s) for product pricing.
+- [Leia Protocol API](https://apis.io/apis/leia/leia-protocol-api/) — The Protocol API from Leia — 1 operation(s) for protocol.
+- [Leia Storage API](https://apis.io/apis/leia/leia-storage-api/) — The Storage API from Leia — 1 operation(s) for storage.
 
-`openapi/` · `agentic-access/` · `asyncapi/` (HTTP callbacks) · `authentication/` · `changelog/` ·
-`conformance/` · `conventions/` · `data-model/` · `errors/` · `examples/` · `lifecycle/` · `llms/` ·
-`mcp/` (candidate) · `overlays/` · `packages/` · `plans/` · `scopes/` · `security/` · `skills/` ·
-`well-known/`
+### Published properties
 
-Not present, and deliberately not authored: no A2A agent card is published on any Leia host, no AsyncAPI
-document exists, no security.txt / trust center / status page / deprecation policy was found, and no
-first-party client library is published on any public package registry.
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### AsyncAPI (1)
+
+Event-driven and webhook contracts.
+
+- [Leia Callbacks](https://apis.io/asyncapis/leia/leia-callbacks/)
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [immersity](https://apis.io/servers/leia/immersity/)
+
+#### Agentic access (1)
+
+Which operations an agent can call, which act, and which need a human in the loop.
+
+- [Leia Agentic Access](https://apis.io/agentic-access/leia/leia-agentic-access/)
+
+#### Collections (2)
+
+Postman and Open Collection request collections.
+
+- [immersity-ai-authentication](https://apis.io/collections/leia/open-leia-immersity-authentication/)
+- [Immersity Cloud API](https://apis.io/collections/leia/open-leia-immersity-cloud-api/)
+
+#### Overlays (1)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Leia Immersity Cloud Api Overlay](https://apis.io/overlays/leia/leia-immersity-cloud-api-overlay/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Leia Authentication](https://apis.io/security/leia/leia-authentication/)
+- [Leia Domain Security](https://apis.io/security/leia/leia-domain-security/)
+
+#### OAuth scopes (1)
+
+The permissions the API asks for.
+
+- [Leia Scopes](https://apis.io/scopes/leia/leia-scopes/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Leia Plans](https://apis.io/plans/leia/leia-plans/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://immersity.ai/)
+- [Documentation](https://docs-api.immersity.ai/docs/getting-started)
+- [Getting started](https://docs-api.immersity.ai/docs/getting-started)
+- [API reference](https://docs-api.immersity.ai/reference/transactioncontroller_estimatemonodepth-1)
+- [Pricing](https://immersity.ai/pricing)
+- [Sign up](https://app.immersity.ai/)
+- [Support](https://discord.gg/immersityai)
+- [Blog](https://immersity.ai/newsroom)
+- [Terms of service](https://immersity.ai/terms-conditions)
+- [Privacy policy](https://immersity.ai/privacy-policy)
+- [GitHub](https://github.com/LeiaInc)
+
+## API Evangelist rating
+
+**Kin Score 52.6** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 73.2 |
+| Contract quality | 63.0 |
+| Contract governance | 4.5 |
+| Operational transparency | 26.3 |
+| Developer ergonomics | 57.7 |
+| Access clarity | 63.2 |
+
+**Agent readiness 31.9** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | yes |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | derived (partial credit) |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | — |
+| Event Surface Described | derived (partial credit) |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 31.8** — AI & Biometrics
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/leia/](https://apis.io/providers/leia/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Leia: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/leia/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
